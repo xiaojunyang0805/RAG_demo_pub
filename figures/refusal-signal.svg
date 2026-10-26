@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400" role="img" aria-labelledby="title desc" class="root">
+<title id="title">How well retrieval scores separate answerable from unanswerable questions</title>
+<desc id="desc">Real project. Best cosine similarity per question overlaps almost completely between answerable and unanswerable questions. The best cross-encoder score separates them better but still overlaps.</desc>
+<style>
+  .root { --surface:#fcfcfb; --t1:#0b0b0b; --t2:#52514e; --grid:#e3e2de; --s1:#2a78d6; --s2:#eb6834; --thr:#0b0b0b; }
+  @media (prefers-color-scheme: dark) {
+    .root { --surface:#1a1a19; --t1:#f0efec; --t2:#c3c2b7; --grid:#33332f; --s1:#3987e5; --s2:#d95926; --thr:#f0efec; }
+  }
+  text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--t1); }
+  .t2 { fill: var(--t2); } .grid { stroke: var(--grid); } .thr { stroke: var(--thr); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  .ans { fill: var(--s1); stroke: var(--surface); stroke-width: 2; } .ref { fill: var(--s2); stroke: var(--surface); stroke-width: 2; }
+</style>
+<rect width="960" height="400" rx="10" fill="var(--surface)"/>
+<text x="28" y="36" font-size="18" font-weight="600">Retrieval scores are a weak refusal signal</text>
+<text x="28" y="56" font-size="12" class="t2">Real project, one dot per golden-set question; best score among the 8 retrieved chunks.</text>
+<text x="28" y="92" font-size="14" font-weight="600">Best cosine similarity (bge-small)</text>
+<text x="28" y="110" font-size="11" class="t2">the built-in pre-LLM gate</text>
+<line class="grid" x1="210.0" x2="210.0" y1="122" y2="204"/>
+<text x="210.0" y="220" font-size="11" class="t2" text-anchor="middle">0.50</text>
+<line class="grid" x1="352.0" x2="352.0" y1="122" y2="204"/>
+<text x="352.0" y="220" font-size="11" class="t2" text-anchor="middle">0.58</text>
+<line class="grid" x1="494.0" x2="494.0" y1="122" y2="204"/>
+<text x="494.0" y="220" font-size="11" class="t2" text-anchor="middle">0.66</text>
+<line class="grid" x1="636.0" x2="636.0" y1="122" y2="204"/>
+<text x="636.0" y="220" font-size="11" class="t2" text-anchor="middle">0.74</text>
+<line class="grid" x1="778.0" x2="778.0" y1="122" y2="204"/>
+<text x="778.0" y="220" font-size="11" class="t2" text-anchor="middle">0.82</text>
+<line class="grid" x1="920.0" x2="920.0" y1="122" y2="204"/>
+<text x="920.0" y="220" font-size="11" class="t2" text-anchor="middle">0.90</text>
+<text x="196" y="148" font-size="12" text-anchor="end">answerable (n=29)</text>
+<circle class="ans" cx="385.7" cy="138" r="5"><title>answerable: 0.60</title></circle>
+<circle class="ans" cx="431.9" cy="144" r="5"><title>answerable: 0.62</title></circle>
+<circle class="ans" cx="515.3" cy="150" r="5"><title>answerable: 0.67</title></circle>
+<circle class="ans" cx="515.3" cy="138" r="5"><title>answerable: 0.67</title></circle>
+<circle class="ans" cx="524.2" cy="144" r="5"><title>answerable: 0.68</title></circle>
+<circle class="ans" cx="533.1" cy="150" r="5"><title>answerable: 0.68</title></circle>
+<circle class="ans" cx="538.4" cy="138" r="5"><title>answerable: 0.69</title></circle>
+<circle class="ans" cx="550.8" cy="144" r="5"><title>answerable: 0.69</title></circle>
+<circle class="ans" cx="556.1" cy="150" r="5"><title>answerable: 0.69</title></circle>
+<circle class="ans" cx="586.3" cy="138" r="5"><title>answerable: 0.71</title></circle>
+<circle class="ans" cx="588.1" cy="144" r="5"><title>answerable: 0.71</title></circle>
+<circle class="ans" cx="611.1" cy="150" r="5"><title>answerable: 0.73</title></circle>
+<circle class="ans" cx="612.9" cy="138" r="5"><title>answerable: 0.73</title></circle>
+<circle class="ans" cx="627.1" cy="144" r="5"><title>answerable: 0.73</title></circle>
+<circle class="ans" cx="627.1" cy="150" r="5"><title>answerable: 0.73</title></circle>
+<circle class="ans" cx="628.9" cy="138" r="5"><title>answerable: 0.74</title></circle>
+<circle class="ans" cx="634.2" cy="144" r="5"><title>answerable: 0.74</title></circle>
+<circle class="ans" cx="637.8" cy="150" r="5"><title>answerable: 0.74</title></circle>
+<circle class="ans" cx="639.5" cy="138" r="5"><title>answerable: 0.74</title></circle>
+<circle class="ans" cx="652.0" cy="144" r="5"><title>answerable: 0.75</title></circle>
+<circle class="ans" cx="691.0" cy="150" r="5"><title>answerable: 0.77</title></circle>
+<circle class="ans" cx="698.1" cy="138" r="5"><title>answerable: 0.78</title></circle>
+<circle class="ans" cx="717.7" cy="144" r="5"><title>answerable: 0.79</title></circle>
+<circle class="ans" cx="726.5" cy="150" r="5"><title>answerable: 0.79</title></circle>
+<circle class="ans" cx="728.3" cy="138" r="5"><title>answerable: 0.79</title></circle>
+<circle class="ans" cx="754.9" cy="144" r="5"><title>answerable: 0.81</title></circle>
+<circle class="ans" cx="767.3" cy="150" r="5"><title>answerable: 0.81</title></circle>
+<circle class="ans" cx="770.9" cy="138" r="5"><title>answerable: 0.82</title></circle>
+<circle class="ans" cx="799.3" cy="144" r="5"><title>answerable: 0.83</title></circle>
+<text x="196" y="188" font-size="12" text-anchor="end">not in corpus (n=5)</text>
+<circle class="ref" cx="463.8" cy="178" r="5"><title>not in corpus: 0.64</title></circle>
+<circle class="ref" cx="541.9" cy="184" r="5"><title>not in corpus: 0.69</title></circle>
+<circle class="ref" cx="549.0" cy="190" r="5"><title>not in corpus: 0.69</title></circle>
+<circle class="ref" cx="627.1" cy="178" r="5"><title>not in corpus: 0.73</title></circle>
+<circle class="ref" cx="628.9" cy="184" r="5"><title>not in corpus: 0.74</title></circle>
+<line class="thr" x1="387.5" x2="387.5" y1="122" y2="204"/>
+<text x="393.5" y="132" font-size="11">default gate 0.60</text>
+<text x="28" y="252" font-size="14" font-weight="600">Best cross-encoder score</text>
+<text x="28" y="270" font-size="11" class="t2">optional reranker, sigmoid of the logit</text>
+<line class="grid" x1="210.0" x2="210.0" y1="282" y2="364"/>
+<text x="210.0" y="380" font-size="11" class="t2" text-anchor="middle">0.00</text>
+<line class="grid" x1="352.0" x2="352.0" y1="282" y2="364"/>
+<text x="352.0" y="380" font-size="11" class="t2" text-anchor="middle">0.20</text>
+<line class="grid" x1="494.0" x2="494.0" y1="282" y2="364"/>
+<text x="494.0" y="380" font-size="11" class="t2" text-anchor="middle">0.40</text>
+<line class="grid" x1="636.0" x2="636.0" y1="282" y2="364"/>
+<text x="636.0" y="380" font-size="11" class="t2" text-anchor="middle">0.60</text>
+<line class="grid" x1="778.0" x2="778.0" y1="282" y2="364"/>
+<text x="778.0" y="380" font-size="11" class="t2" text-anchor="middle">0.80</text>
+<line class="grid" x1="920.0" x2="920.0" y1="282" y2="364"/>
+<text x="920.0" y="380" font-size="11" class="t2" text-anchor="middle">1.00</text>
+<text x="196" y="308" font-size="12" text-anchor="end">answerable (n=29)</text>
+<circle class="ans" cx="221.4" cy="298" r="5"><title>answerable: 0.02</title></circle>
+<circle class="ans" cx="435.1" cy="304" r="5"><title>answerable: 0.32</title></circle>
+<circle class="ans" cx="485.5" cy="310" r="5"><title>answerable: 0.39</title></circle>
+<circle class="ans" cx="612.6" cy="298" r="5"><title>answerable: 0.57</title></circle>
+<circle class="ans" cx="692.8" cy="304" r="5"><title>answerable: 0.68</title></circle>
+<circle class="ans" cx="734.0" cy="310" r="5"><title>answerable: 0.74</title></circle>
+<circle class="ans" cx="781.6" cy="298" r="5"><title>answerable: 0.81</title></circle>
+<circle class="ans" cx="782.3" cy="304" r="5"><title>answerable: 0.81</title></circle>
+<circle class="ans" cx="849.7" cy="310" r="5"><title>answerable: 0.90</title></circle>
+<circle class="ans" cx="857.5" cy="298" r="5"><title>answerable: 0.91</title></circle>
+<circle class="ans" cx="863.9" cy="304" r="5"><title>answerable: 0.92</title></circle>
+<circle class="ans" cx="865.3" cy="310" r="5"><title>answerable: 0.92</title></circle>
+<circle class="ans" cx="868.9" cy="298" r="5"><title>answerable: 0.93</title></circle>
+<circle class="ans" cx="880.2" cy="304" r="5"><title>answerable: 0.94</title></circle>
+<circle class="ans" cx="885.9" cy="310" r="5"><title>answerable: 0.95</title></circle>
+<circle class="ans" cx="892.3" cy="298" r="5"><title>answerable: 0.96</title></circle>
+<circle class="ans" cx="893.0" cy="304" r="5"><title>answerable: 0.96</title></circle>
+<circle class="ans" cx="899.4" cy="310" r="5"><title>answerable: 0.97</title></circle>
+<circle class="ans" cx="903.0" cy="298" r="5"><title>answerable: 0.98</title></circle>
+<circle class="ans" cx="906.5" cy="304" r="5"><title>answerable: 0.98</title></circle>
+<circle class="ans" cx="912.2" cy="310" r="5"><title>answerable: 0.99</title></circle>
+<circle class="ans" cx="912.9" cy="298" r="5"><title>answerable: 0.99</title></circle>
+<circle class="ans" cx="915.7" cy="304" r="5"><title>answerable: 0.99</title></circle>
+<circle class="ans" cx="915.7" cy="310" r="5"><title>answerable: 0.99</title></circle>
+<circle class="ans" cx="916.5" cy="298" r="5"><title>answerable: 0.99</title></circle>
+<circle class="ans" cx="916.5" cy="304" r="5"><title>answerable: 0.99</title></circle>
+<circle class="ans" cx="916.5" cy="310" r="5"><title>answerable: 0.99</title></circle>
+<circle class="ans" cx="917.2" cy="298" r="5"><title>answerable: 1.00</title></circle>
+<circle class="ans" cx="919.3" cy="304" r="5"><title>answerable: 1.00</title></circle>
+<text x="196" y="348" font-size="12" text-anchor="end">not in corpus (n=5)</text>
+<circle class="ref" cx="213.6" cy="338" r="5"><title>not in corpus: 0.01</title></circle>
+<circle class="ref" cx="222.8" cy="344" r="5"><title>not in corpus: 0.02</title></circle>
+<circle class="ref" cx="224.9" cy="350" r="5"><title>not in corpus: 0.02</title></circle>
+<circle class="ref" cx="293.1" cy="338" r="5"><title>not in corpus: 0.12</title></circle>
+<circle class="ref" cx="413.1" cy="344" r="5"><title>not in corpus: 0.29</title></circle>
+<line class="thr" x1="352.0" x2="352.0" y1="282" y2="364"/>
+<text x="358.0" y="292" font-size="11">0.20 for reference</text>
+</svg>

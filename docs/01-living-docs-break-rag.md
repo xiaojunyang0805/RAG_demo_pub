@@ -44,7 +44,7 @@ diligent the team, the more history the index holds.
 - **A bigger or newer embedding model.** It matches the history *better*, because the history is the better text
   match.
 - **A reranker alone.** A cross-encoder judges relevance, not currency: an archived note that states the old value
-  in plain words is highly relevant. On top of truth weighting it helps a little (page 09, coming); instead of it,
+  in plain words is highly relevant. On top of truth weighting it helps a little ([09](09-results-and-caveats.md)); instead of it,
   it does not address the problem.
 - **Deleting the archive.** You lose the reasoning trail, and history keeps accruing in logs anyway.
 - **Asking the model to prefer recent sources.** It can only weigh what it is handed. If the top 8 chunks are history,

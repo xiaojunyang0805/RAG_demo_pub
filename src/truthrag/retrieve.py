@@ -17,7 +17,11 @@ MODES = ("bm25", "vector", "hybrid", "hybrid+truth")
 ID_RE = re.compile(r"(?<![\w-])(?:[A-Z]{1,3}-O\d+|[A-Z]{1,3}-\d{1,3}|[A-Z]\d{1,3}|[A-Z0-9]{2,}-[A-Z0-9]{2,})(?![\w-])")
 
 
-def weight(chunk: Chunk, cfg: dict) -> float:
+def weight(chunk: Chunk, cfg: dict, query_ids: set[str] = frozenset()) -> float:
+    """Truth weight. A question that names a record (a decision, an open item, an ADR — whatever `truth.record_ids`
+    matches) is asking about that record, so a chunk that contains its ID keeps full weight whatever its class."""
+    if query_ids and any(i in chunk.embed_text() for i in query_ids):
+        return 1.0
     w = cfg["weights"][chunk.truth]
     return w * cfg["weights"]["retired_penalty"] if chunk.retired_by else w
 
@@ -52,9 +56,11 @@ def retrieve(index, query: str, cfg: dict, mode: str = "hybrid+truth", top_k: in
             h = hits.setdefault(i, Hit(index.chunks[i]))
             h.vector_rank, h.vector_sim = rank, sim
     use_truth = mode == "hybrid+truth"
+    rid = cfg["truth"].get("record_ids")
+    query_ids = set(re.findall(rid, query)) if rid else set()
     for h in hits.values():
         h.fused = rrf([h.bm25_rank, h.vector_rank], r["rrf_k"])
-        h.weight = weight(h.chunk, cfg) if use_truth else 1.0
+        h.weight = weight(h.chunk, cfg, query_ids) if use_truth else 1.0
         h.score = h.fused * h.weight
     ranked = sorted(hits.values(), key=lambda h: -h.fused)
     if (r.get("cross_encoder") if rerank is None else rerank) and mode.startswith("hybrid"):

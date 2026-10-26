@@ -3,9 +3,33 @@
   "subtitle": "121-document hardware project · 29 questions · 2026-10-26",
   "note": "Aggregates only. Corpus and per-question results are private. top1_history: share of questions whose top-ranked chunk is a log or archive chunk (no cross-encoder).",
   "rows": [
-    {"mode": "BM25", "hit5": 0.66, "mrr": 0.37, "stale_ret": 0.56, "top1_history": 0.69},
-    {"mode": "vector", "hit5": 0.45, "mrr": 0.34, "stale_ret": 0.67, "top1_history": 0.52},
-    {"mode": "hybrid", "hit5": 0.69, "mrr": 0.46, "stale_ret": 0.78, "top1_history": 0.66},
-    {"mode": "hybrid + truth", "hit5": 0.90, "mrr": 0.76, "stale_ret": 0.78, "top1_history": 0.00}
+    {
+      "mode": "BM25",
+      "hit5": 0.66,
+      "mrr": 0.4,
+      "stale_ret": 0.67,
+      "top1_history": 0.69
+    },
+    {
+      "mode": "vector",
+      "hit5": 0.45,
+      "mrr": 0.34,
+      "stale_ret": 0.67,
+      "top1_history": 0.52
+    },
+    {
+      "mode": "hybrid",
+      "hit5": 0.69,
+      "mrr": 0.46,
+      "stale_ret": 0.78,
+      "top1_history": 0.66
+    },
+    {
+      "mode": "hybrid + truth",
+      "hit5": 0.9,
+      "mrr": 0.76,
+      "stale_ret": 0.78,
+      "top1_history": 0.03
+    }
   ]
 }

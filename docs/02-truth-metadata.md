@@ -62,5 +62,5 @@ history — *was*, *not*, *no longer*, *superseded*, *replaced*, `~~strikethroug
 ## If your documents carry no signal
 
 Start with the cheapest one: move superseded documents into an `archive/` folder. Then add a one-line status
-header to the ten documents people ask about most. The transplant guide (page 08, coming)
+header to the ten documents people ask about most. The transplant guide ([08](08-transplant-guide.md))
 covers ADR repositories, wikis, regulated design files and runbooks.

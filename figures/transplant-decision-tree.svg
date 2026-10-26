@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" width="960" height="500" role="img" aria-labelledby="title desc" class="root">
+<title id="title">Transplant decision tree</title>
+<desc id="desc">Do your documents change, and are old versions kept? If not, plain RAG is enough. If yes: do they carry a status header? Use the header setting. If not, do they have YAML front matter with a status? Use front matter. If not, are old documents in an archive folder? Use archive folders. If none of these, add the cheapest signal first: move superseded documents into an archive folder, then a one-line status on the most-asked documents. In every case, logs with a current-state section get log_current_section, decisions that retire wording get a retired-terms table, and you measure with a golden set that includes stale-truth questions.</desc>
+<style>
+  .root { --surface:#fcfcfb; --box:#f3f2ee; --t1:#0b0b0b; --t2:#52514e; --line:#b9b8b2; --acc:#2a78d6; --accbg:#e3eefb;
+          --ok:#0a6b37; --okbg:#d7f0df; }
+  @media (prefers-color-scheme: dark) {
+    .root { --surface:#1a1a19; --box:#262624; --t1:#f0efec; --t2:#c3c2b7; --line:#5a5955; --acc:#5b9ded; --accbg:#1d2a3b;
+            --ok:#7ad69c; --okbg:#173323; }
+  }
+  text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--t1); }
+  .t2 { fill: var(--t2); } .mono, .mono text { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-variant-ligatures: none; }
+  .q { fill: var(--box); stroke: var(--line); } .a { fill: var(--okbg); stroke: var(--ok); } .a-t { fill: var(--ok); }
+  .all { fill: var(--accbg); stroke: var(--acc); stroke-width: 1.5; } .all-t { fill: var(--acc); }
+  .arrow { stroke: var(--line); stroke-width: 1.5; fill: none; marker-end: url(#h); }
+  .lbl { font-size: 11px; fill: var(--t2); }
+</style>
+<defs><marker id="h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--line)"/></marker></defs>
+<rect width="960" height="500" rx="10" fill="var(--surface)"/>
+<text x="28" y="38" font-size="18" font-weight="600">Which signal to use</text>
+
+<!-- questions column x 28..318 ; answers x 400..660 -->
+<rect class="q" x="28" y="60" width="300" height="52" rx="8"/>
+<text x="44" y="82" font-size="13" font-weight="600">Do documents change, and are old</text>
+<text x="44" y="100" font-size="13" font-weight="600">versions or logs kept?</text>
+<rect class="q" x="400" y="64" width="260" height="44" rx="8"/>
+<text x="416" y="91" font-size="13">Plain RAG is enough</text>
+<path class="arrow" d="M328,86 H398"/><text class="lbl" x="340" y="80">no</text>
+
+<rect class="q" x="28" y="142" width="300" height="44" rx="8"/>
+<text x="44" y="169" font-size="13" font-weight="600">A status line near the top?</text>
+<rect class="a" x="400" y="138" width="260" height="52" rx="8"/>
+<text x="416" y="160" font-size="13" font-weight="600" class="a-t">header + header_classes</text>
+<text x="416" y="178" font-size="11" class="t2 mono">Status: Released · Draft</text>
+<path class="arrow" d="M178,112 V140"/><text class="lbl" x="186" y="130">yes</text>
+<path class="arrow" d="M328,164 H398"/><text class="lbl" x="340" y="158">yes</text>
+
+<rect class="q" x="28" y="216" width="300" height="44" rx="8"/>
+<text x="44" y="243" font-size="13" font-weight="600">YAML front matter with a status?</text>
+<rect class="a" x="400" y="212" width="260" height="52" rx="8"/>
+<text x="416" y="234" font-size="13" font-weight="600" class="a-t">frontmatter_key + classes</text>
+<text x="416" y="252" font-size="11" class="t2 mono">status: superseded (ADRs)</text>
+<path class="arrow" d="M178,186 V214"/><text class="lbl" x="186" y="204">no</text>
+<path class="arrow" d="M328,238 H398"/><text class="lbl" x="340" y="232">yes</text>
+
+<rect class="q" x="28" y="290" width="300" height="44" rx="8"/>
+<text x="44" y="317" font-size="13" font-weight="600">Old documents in their own folder?</text>
+<rect class="a" x="400" y="286" width="260" height="52" rx="8"/>
+<text x="416" y="308" font-size="13" font-weight="600" class="a-t">archive_dirs</text>
+<text x="416" y="326" font-size="11" class="t2 mono">archive/ · old/ · deprecated/</text>
+<path class="arrow" d="M178,260 V288"/><text class="lbl" x="186" y="278">no</text>
+<path class="arrow" d="M328,312 H398"/><text class="lbl" x="340" y="306">yes</text>
+
+<rect class="a" x="28" y="364" width="300" height="70" rx="8"/>
+<text x="44" y="386" font-size="13" font-weight="600" class="a-t">Add the cheapest signal first</text>
+<text x="44" y="404" font-size="12" class="t2">1. move superseded docs to archive/</text>
+<text x="44" y="420" font-size="12" class="t2">2. one status line on the 10 most-asked</text>
+<path class="arrow" d="M178,334 V362"/><text class="lbl" x="186" y="352">no</text>
+
+<!-- always -->
+<rect class="all" x="700" y="64" width="232" height="370" rx="10"/>
+<text x="716" y="90" font-size="13" font-weight="700" class="all-t">IN EVERY CASE</text>
+<text x="716" y="122" font-size="13" font-weight="600">Logs with a summary</text>
+<text x="716" y="140" font-size="11" class="t2">→ log_current_section</text>
+<text x="716" y="176" font-size="13" font-weight="600">Records people cite by ID</text>
+<text x="716" y="194" font-size="11" class="t2">→ record_ids (ADR-0007, D12)</text>
+<text x="716" y="230" font-size="13" font-weight="600">Decisions that retire wording</text>
+<text x="716" y="248" font-size="11" class="t2">→ a retired-terms table</text>
+<text x="716" y="284" font-size="13" font-weight="600">A golden set</text>
+<text x="716" y="302" font-size="11" class="t2">20–40 questions, ≥ 5 whose</text>
+<text x="716" y="318" font-size="11" class="t2">answer changed, ≥ 3 refusals</text>
+<text x="716" y="354" font-size="13" font-weight="600">Measure before tuning</text>
+<text x="716" y="372" font-size="11" class="t2">ablation: hybrid vs + truth;</text>
+<text x="716" y="388" font-size="11" class="t2">weights change only on</text>
+<text x="716" y="404" font-size="11" class="t2">golden-set evidence</text>
+
+<text x="28" y="470" font-size="12" class="t2">Signals combine: precedence is archive folder › front matter › header › default. Most corpora need two lines of configuration.</text>
+</svg>

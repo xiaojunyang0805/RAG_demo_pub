@@ -21,7 +21,7 @@ stale-truth questions — that tells you where to work.
 
 Watch for a metric that stops discriminating. After the real project's chunking was fixed, no superseded value
 reached the top 5 in any mode, so stale-truth sat at 0.78 with or without truth weighting: its misses had become
-recall misses. *Top-1 is history* (0.66 → 0.00) kept showing the mechanism. Report both, and say which one moved.
+recall misses. *Top-1 is history* (0.66 → 0.03) kept showing the mechanism. Report both, and say which one moved.
 
 ## Mark relevance by text, not by file
 

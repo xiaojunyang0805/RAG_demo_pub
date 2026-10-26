@@ -11,8 +11,9 @@ Read in order, or jump to what you need.
 | 05 | [Evaluation](05-evaluation.md) | A golden set with a stale-truth category, relevance marked by text pattern, not file path |
 | 06 | [Tracking a live corpus](06-tracking-a-live-corpus.md) | Pin every result to a corpus commit; the golden-set check also finds stale statements in your docs |
 | 07 | [Responsible answers](07-responsible-answers.md) | Cite or refuse, verify every citation, redact before indexing |
-| 08 | Transplant guide | *coming* |
-| 09 | Results and caveats | *coming* |
+| 08 | [Transplant guide](08-transplant-guide.md) | Find the signal your documents carry, two lines of config, a golden set — shown on an ADR repository |
+| 09 | [Results and caveats](09-results-and-caveats.md) | Every number in one place, what helped, what did not, and what is not measured yet |
 
-All examples run on the synthetic corpus in [`examples/halyard`](../examples/halyard). Numbers from the real
+Examples run on two synthetic corpora: [`examples/halyard`](../examples/halyard) (engineering project notes) and
+[`examples/adr`](../examples/adr) (architecture decision records). Numbers from the real
 project are aggregates; its corpus is private.

@@ -1,0 +1,13 @@
+# Golden set for the ADR example (fields: see examples/halyard/golden.yaml).
+questions:
+- {id: S01, category: stale, question: "How do clients authenticate?",
+   evidence: 'JWT', must: ['(?i)OAuth|JWT'], stale: '(?i)session cookie'}
+- {id: S02, category: stale, question: "How is Larkspur deployed?",
+   evidence: 'Kubernetes', must: ['(?i)Kubernetes'], stale: '(?i)Ansible'}
+- {id: S03, category: stale, question: "What protocol do internal services use to call each other?",
+   evidence: 'gRPC', must: ['(?i)gRPC'], stale: '(?i)internal service calls use REST'}
+- {id: F01, category: fact, question: "Which database is the system of record?",
+   evidence: 'PostgreSQL', must: ['PostgreSQL']}
+- {id: E01, category: exact_id, question: "What does ADR-0008 propose?",
+   evidence: 'ADR-0008', evidence_truth: any, must: ['(?i)Kafka']}
+- {id: R01, category: refusal, question: "Which CDN serves the web shop?", absent: '(?i)\bCDN\b|CloudFront|Akamai|Fastly'}

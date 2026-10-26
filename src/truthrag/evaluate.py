@@ -2,7 +2,8 @@
 
 Retrieval metrics need no API key: hit@5, MRR and stale-truth ranking for every mode (the ablation).
 Answer metrics call Claude: correctness, citation faithfulness, stale-truth in the answer, refusal, leaks.
-Relevance is marked by text pattern, not file path, so the set survives re-chunking.
+Relevance is marked by text pattern, not file path, so the set survives re-chunking. Patterns are matched against
+what retrieval sees: the path, the heading trail and the chunk text.
 """
 from __future__ import annotations
 
@@ -38,41 +39,41 @@ def check_golden(qs: list[dict], chunks, cfg: dict) -> list[tuple[str, str, str]
     out = []
     for q in qs:
         if q.get("_absent"):
-            n = sum(bool(q["_absent"].search(c.text)) for c in chunks)
+            n = sum(bool(q["_absent"].search(c.embed_text())) for c in chunks)
             if n:
                 out.append((q["id"], "FAIL", f"refusal question is answerable: `absent` matches {n} chunks"))
             continue
         pool = chunks if q.get("evidence_truth") == "any" else cur
-        if q.get("_evidence") and not any(q["_evidence"].search(c.text) for c in pool):
+        if q.get("_evidence") and not any(q["_evidence"].search(c.embed_text()) for c in pool):
             out.append((q["id"], "FAIL", "no chunk matches `evidence`"))
         for p in q["_all"]:
-            if not any(p.search(c.text) for c in chunks):
+            if not any(p.search(c.embed_text()) for c in chunks):
                 out.append((q["id"], "FAIL", f"no chunk matches `{p.pattern}`"))
         if q.get("_stale") and q.get("_evidence"):
             for c in cur:
-                if c.truth != REFERENCE and states(q["_stale"], c.text, neg) and not q["_evidence"].search(c.text):
+                if c.truth != REFERENCE and states(q["_stale"], c.text, neg) and not q["_evidence"].search(c.embed_text()):
                     out.append((q["id"], "WARN", f"current doc states the superseded value: {c.citation[:80]}"))
     return out
 
 
 def _relevant(q: dict, chunk) -> bool:
-    return bool(q.get("_evidence") and q["_evidence"].search(chunk.text)
+    return bool(q.get("_evidence") and q["_evidence"].search(chunk.embed_text())
                 and (q.get("evidence_truth") == "any" or chunk.truth in CURRENT_CLASSES))
 
 
 def score_retrieval(q: dict, hits, neg) -> dict:
     r: dict = {}
     if q.get("_all"):
-        ranks = [next((n for n, h in enumerate(hits, 1) if p.search(h.chunk.text)), None) for p in q["_all"]]
+        ranks = [next((n for n, h in enumerate(hits, 1) if p.search(h.chunk.embed_text())), None) for p in q["_all"]]
         worst = None if None in ranks else max(ranks)
         r.update(rank=worst, hit5=worst is not None and worst <= 5)
     elif q.get("_evidence"):
         rank = next((n for n, h in enumerate(hits, 1) if _relevant(q, h.chunk)), None)
         r.update(rank=rank, hit5=rank is not None and rank <= 5)
     if q.get("_stale") and q.get("_evidence"):
-        first = next((h.chunk for h in hits[:5] if q["_evidence"].search(h.chunk.text)
+        first = next((h.chunk for h in hits[:5] if q["_evidence"].search(h.chunk.embed_text())
                       or states(q["_stale"], h.chunk.text, neg)), None)
-        r["stale_ret"] = bool(first and q["_evidence"].search(first.text))
+        r["stale_ret"] = bool(first and q["_evidence"].search(first.embed_text()))
     r["top1_truth"] = hits[0].chunk.truth if hits else None
     return r
 
@@ -138,7 +139,7 @@ def run_answers(index, qs: list[dict], cfg: dict, model: str | None) -> list[dic
             cited = [ans.hits[n - 1].chunk for n in ans.citations if 1 <= n <= len(ans.hits)]
             pats = [q["_evidence"]] if q.get("_evidence") else q["_all"] or q["_must"]
             row["faithful"] = not any(i.startswith("citation") for i in ans.guard_issues) and \
-                any(p.search(c.text) for c in cited for p in pats)
+                any(p.search(c.embed_text()) for c in cited for p in pats)
             if q.get("_stale"):
                 row["stale_ans"] = row["correct"] and not states(q["_stale"], ans.text, neg)
         rows.append(row)

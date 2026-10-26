@@ -1,0 +1,192 @@
+{
+ "label": "Real project",
+ "date": "2026-10-26",
+ "note": "One row per golden-set question: category and the best cosine / cross-encoder score among the 8 retrieved chunks (hybrid + truth). No question text.",
+ "rows": [
+  {
+   "cat": "exact_id",
+   "cos": 0.599,
+   "rr": 0.567
+  },
+  {
+   "cat": "exact_id",
+   "cos": 0.625,
+   "rr": 0.921
+  },
+  {
+   "cat": "exact_id",
+   "cos": 0.672,
+   "rr": 0.805
+  },
+  {
+   "cat": "exact_id",
+   "cos": 0.677,
+   "rr": 0.68
+  },
+  {
+   "cat": "exact_id",
+   "cos": 0.682,
+   "rr": 0.962
+  },
+  {
+   "cat": "exact_id",
+   "cos": 0.695,
+   "rr": 0.976
+  },
+  {
+   "cat": "fact",
+   "cos": 0.712,
+   "rr": 0.016
+  },
+  {
+   "cat": "fact",
+   "cos": 0.735,
+   "rr": 0.952
+  },
+  {
+   "cat": "fact",
+   "cos": 0.735,
+   "rr": 0.317
+  },
+  {
+   "cat": "fact",
+   "cos": 0.736,
+   "rr": 0.738
+  },
+  {
+   "cat": "fact",
+   "cos": 0.739,
+   "rr": 0.923
+  },
+  {
+   "cat": "fact",
+   "cos": 0.749,
+   "rr": 0.989
+  },
+  {
+   "cat": "fact",
+   "cos": 0.771,
+   "rr": 0.981
+  },
+  {
+   "cat": "fact",
+   "cos": 0.775,
+   "rr": 0.99
+  },
+  {
+   "cat": "fact",
+   "cos": 0.791,
+   "rr": 0.996
+  },
+  {
+   "cat": "fact",
+   "cos": 0.792,
+   "rr": 0.971
+  },
+  {
+   "cat": "multihop",
+   "cos": 0.672,
+   "rr": 0.928
+  },
+  {
+   "cat": "multihop",
+   "cos": 0.692,
+   "rr": 0.912
+  },
+  {
+   "cat": "multihop",
+   "cos": 0.713,
+   "rr": 0.901
+  },
+  {
+   "cat": "multihop",
+   "cos": 0.727,
+   "rr": 0.944
+  },
+  {
+   "cat": "multihop",
+   "cos": 0.807,
+   "rr": 0.995
+  },
+  {
+   "cat": "redaction",
+   "cos": 0.602,
+   "rr": 0.028
+  },
+  {
+   "cat": "redaction",
+   "cos": 0.632,
+   "rr": 0.995
+  },
+  {
+   "cat": "redaction",
+   "cos": 0.763,
+   "rr": 0.991
+  },
+  {
+   "cat": "refusal",
+   "cos": 0.643,
+   "rr": 0.286
+  },
+  {
+   "cat": "refusal",
+   "cos": 0.687,
+   "rr": 0.018
+  },
+  {
+   "cat": "refusal",
+   "cos": 0.691,
+   "rr": 0.021
+  },
+  {
+   "cat": "refusal",
+   "cos": 0.735,
+   "rr": 0.005
+  },
+  {
+   "cat": "refusal",
+   "cos": 0.736,
+   "rr": 0.117
+  },
+  {
+   "cat": "stale",
+   "cos": 0.685,
+   "rr": 0.388
+  },
+  {
+   "cat": "stale",
+   "cos": 0.726,
+   "rr": 0.961
+  },
+  {
+   "cat": "stale",
+   "cos": 0.741,
+   "rr": 0.994
+  },
+  {
+   "cat": "stale",
+   "cos": 0.742,
+   "rr": 0.806
+  },
+  {
+   "cat": "stale",
+   "cos": 0.786,
+   "rr": 0.995
+  },
+  {
+   "cat": "stale",
+   "cos": 0.814,
+   "rr": 0.994
+  },
+  {
+   "cat": "stale",
+   "cos": 0.816,
+   "rr": 0.995
+  },
+  {
+   "cat": "stale",
+   "cos": 0.832,
+   "rr": 0.999
+  }
+ ]
+}

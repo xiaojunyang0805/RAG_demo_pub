@@ -12,6 +12,7 @@ truth:
   log_current_section: '§\s*0\b'          # "## §0 CURRENT STATE" in a LOG is current
   default: current
   retired_terms: docs/RetiredTerms.md
+  record_ids: '\b(?:[A-Z]{2}-O\d+|D\d{1,2}|P-\d{2}|TR-\d)\b'   # open items, decisions, parameters, test reports
 
 weights: {current: 1.0, log_current: 1.0, reference: 0.9, log: 0.5, archive: 0.2, retired_penalty: 0.5}
 

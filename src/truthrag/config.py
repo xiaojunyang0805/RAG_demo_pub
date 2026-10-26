@@ -18,6 +18,7 @@ DEFAULTS: dict[str, Any] = {
         "log_current_section": None,  # heading regex marking a log's current section, e.g. '§\s*0\b'
         "default": "current",
         "retired_terms": None,        # optional table of retired wording (see docs)
+        "record_ids": None,           # regex for record IDs; a question naming one keeps that record at full weight
         "negation_markers": ["~~", r"\bwas\b", r"\bnot\b", r"\bno longer\b", r"\bsuperseded\b", r"\breplaced\b",
                              r"\bformerly\b", r"\bretired\b", r"\binstead\b"],
     },

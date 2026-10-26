@@ -1,0 +1,16 @@
+# truthrag configuration for an ADR repository: truth comes only from YAML front matter.
+
+corpus:
+  root: .
+  glob: "**/*.md"
+
+truth:
+  frontmatter_key: status
+  frontmatter_classes: {accepted: current, superseded: archive, deprecated: archive, proposed: log}
+  default: current
+  record_ids: 'ADR-\d{4}'                # a question naming an ADR is about that ADR, whatever its status
+
+retrieval:
+  min_vector_sim: 0.6
+
+golden: golden.yaml

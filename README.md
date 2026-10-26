@@ -25,14 +25,14 @@ This repo shows a small, transplantable fix — and how to measure it.
 
 ## Results
 
-![Grouped bars of hit@5 and top-1-is-current: on the example corpus top-1-is-current rises from 0.62 to 1.00 with truth weighting; on the real project from 0.34 to 1.00, with hit@5 from 0.69 to 0.90](figures/ablation.svg)
+![Grouped bars of hit@5 and top-1-is-current: on the example corpus top-1-is-current rises from 0.62 to 1.00 with truth weighting; on the real project from 0.34 to 0.97, with hit@5 from 0.69 to 0.90](figures/ablation.svg)
 
 | Corpus | Retrieval | hit@5 | MRR | top-1 is history | stale-truth |
 |---|---|---|---|---|---|
-| Example (Halyard, synthetic) | hybrid | 0.81 | 0.64 | 0.38 | 0.12 |
-| | **hybrid + truth** | **0.90** | **0.84** | **0.00** | **1.00** |
+| Example (Halyard, synthetic) | hybrid | 0.86 | 0.65 | 0.38 | 0.12 |
+| | **hybrid + truth** | **0.90** | **0.85** | **0.00** | **1.00** |
 | Real hardware project (121 docs, private) | hybrid | 0.69 | 0.46 | 0.66 | 0.78 |
-| | **hybrid + truth** | **0.90** | **0.76** | **0.00** | 0.78 |
+| | **hybrid + truth** | **0.90** | **0.76** | **0.03** | 0.78 |
 
 *top-1 is history*: share of questions whose best-ranked chunk is a log or archive chunk. *stale-truth*: for
 questions whose answer changed, the first top-5 chunk stating either value states the current one.
@@ -84,15 +84,16 @@ truth:
 ```
 
 **The guide, [`docs/`](docs/README.md)**, explains each part — why living documents break RAG, where truth metadata
-comes from, the pipeline, chunking lessons, evaluation, tracking a live corpus, responsible answers. A transplant
-guide for ADR repositories, wikis, regulated design files and runbooks is next.
+comes from, the pipeline, chunking lessons, evaluation, tracking a live corpus, responsible answers — and ends with
+a [transplant guide](docs/08-transplant-guide.md) for ADR repositories, wikis, regulated design files and runbooks.
 
 ## What is in the repo
 
 | Path | What |
 |---|---|
-| `docs/` | The guide: seven pages, each with a figure |
+| `docs/` | The guide: nine pages, each with a figure |
 | `src/truthrag/` | The package: truth classifier, chunker, redaction, hybrid index, truth-weighted retrieval, Claude answer + guard, evaluation |
+| `examples/adr/` | A second synthetic corpus — eight architecture decision records — where truth comes only from front matter |
 | `examples/halyard/` | A synthetic 20-document project (a 48 V motor-controller board) with planted superseded values, a golden set, and a config |
 | `figures/` | Every figure as SVG; `scripts/plot_ablation.py` regenerates the chart from `truthrag eval --json` |
 | `tests/` | Unit tests; no network, no API key |
