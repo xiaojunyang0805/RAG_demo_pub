@@ -23,7 +23,7 @@ DEFAULTS: dict[str, Any] = {
     },
     "weights": {"current": 1.0, "log_current": 1.0, "reference": 0.9, "log": 0.5, "archive": 0.2,
                 "retired_penalty": 0.5},
-    "chunking": {"split_levels": [2, 3], "max_tokens": 450, "chars_per_token": 3},
+    "chunking": {"split_levels": [2, 3], "max_tokens": 400, "chars_per_token": "auto"},  # auto = measured
     "embedding": {"model": "BAAI/bge-small-en-v1.5", "batch_size": 64, "cache_dir": None},
     "index": {"dir": ".truthrag"},
     "retrieval": {"top_k": 8, "candidates": 40, "rrf_k": 60, "min_vector_sim": 0.6, "cross_encoder": None,

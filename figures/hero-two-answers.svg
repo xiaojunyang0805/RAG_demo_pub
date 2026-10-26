@@ -11,7 +11,7 @@
             --bad:#f08a8a; --good:#7ad69c; }
   }
   text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--t1); }
-  .t2 { fill: var(--t2); } .mono { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; }
+  .t2 { fill: var(--t2); } .mono, .mono text { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-variant-ligatures: none; }
   .card { fill: var(--card); stroke: var(--line); }
   .b-cur { fill: var(--curbg); } .b-cur-t { fill: var(--cur); }
   .b-hist { fill: var(--histbg); } .b-hist-t { fill: var(--hist); }
@@ -51,17 +51,17 @@
 <text x="512" y="122" font-size="15" font-weight="600">Truth-aware retrieval</text>
 <text x="512" y="141" font-size="12" class="t2">the same search, × a weight for how current each source is</text>
 
-<g transform="translate(512,160)">
+<g transform="translate(512,232)">
   <rect class="b-cur" width="70" height="20" rx="4"/><text class="b-cur-t" x="35" y="14" font-size="11" font-weight="700" text-anchor="middle">CURRENT</text>
   <text x="80" y="14" font-size="12" class="mono t2">HB-P DesignNote § 5. Connector</text>
   <text x="0" y="40" font-size="13">“Phase currents up to <tspan font-weight="700">32 A</tspan> need the 7.62 mm block…”</text>
 </g>
-<g transform="translate(512,232)">
+<g transform="translate(512,304)">
   <rect class="b-cur" width="70" height="20" rx="4"/><text class="b-cur-t" x="35" y="14" font-size="11" font-weight="700" text-anchor="middle">CURRENT</text>
   <text x="80" y="14" font-size="12" class="mono t2">HB-P DesignNote § 2. DC link</text>
   <text x="0" y="40" font-size="13">“…9.8 A rms ripple at <tspan font-weight="700">32 A</tspan> phase current…”</text>
 </g>
-<g transform="translate(512,304)">
+<g transform="translate(512,160)">
   <rect class="b-cur" width="70" height="20" rx="4"/><text class="b-cur-t" x="35" y="14" font-size="11" font-weight="700" text-anchor="middle">CURRENT</text>
   <text x="80" y="14" font-size="12" class="mono t2">Commissioning Guide § 2. First power</text>
   <text x="0" y="40" font-size="13">“…check … current limit = <tspan font-weight="700">32 A</tspan>…”</text>

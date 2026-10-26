@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400" role="img" aria-labelledby="title desc" class="root">
+<title id="title">The embedder reads 512 tokens and silently drops the rest</title>
+<desc id="desc">Real project, measured 2.66 characters per model token. A chunk sized as 800 tokens at a guessed 4 characters per token is 3,200 characters, about 1,200 model tokens: the embedder reads 512 and drops about 57 percent. A first fix at a guessed 3 characters per token still left 10.7 percent of chunks over the window. Sizing chunks with the embedder's own tokenizer leaves none over.</desc>
+<style>
+  .root { --surface:#fcfcfb; --t1:#0b0b0b; --t2:#52514e; --line:#b9b8b2; --read:#2a78d6; --lost:#e3e2de; --lostline:#b02a2a; --ok:#0a6b37; }
+  @media (prefers-color-scheme: dark) {
+    .root { --surface:#1a1a19; --t1:#f0efec; --t2:#c3c2b7; --line:#5a5955; --read:#3987e5; --lost:#2e2e2b; --lostline:#f08a8a; --ok:#7ad69c; }
+  }
+  text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--t1); }
+  .t2 { fill: var(--t2); } .read { fill: var(--read); } .lost { fill: url(#hatch); stroke: var(--lostline); stroke-width: 1; }
+  .win { stroke: var(--t1); stroke-width: 2; stroke-dasharray: 4 3; } .bad { fill: var(--lostline); } .ok { fill: var(--ok); }
+</style>
+<defs>
+  <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+    <rect width="8" height="8" fill="var(--lost)"/><line x1="0" y1="0" x2="0" y2="8" stroke="var(--lostline)" stroke-width="2"/>
+  </pattern>
+</defs>
+<rect width="960" height="400" rx="10" fill="var(--surface)"/>
+<text x="28" y="38" font-size="18" font-weight="600">An embedder reads its window and silently drops the rest</text>
+<text x="28" y="60" font-size="12" class="t2">Real project, measured with the embedder's own tokenizer: 2.66 characters per token, window 512 tokens. Scale: 1 px = 2 tokens.</text>
+
+<!-- scale: x0 = 260, 0.5 px per token; window 512 -> x 516 -->
+<line class="win" x1="516" x2="516" y1="80" y2="330"/>
+<text x="522" y="92" font-size="12" font-weight="700">512-token window</text>
+
+<text x="28" y="132" font-size="13" font-weight="600">Guess: 800 tokens × 4 chars</text>
+<text x="28" y="150" font-size="12" class="t2">3,200 chars ≈ 1,200 tokens</text>
+<rect class="read" x="260" y="118" width="256" height="34" rx="3"/>
+<rect class="lost" x="516" y="118" width="344" height="34"/>
+<text x="860" y="172" font-size="13" font-weight="700" class="bad" text-anchor="end">≈ 57 % of the chunk is never read</text>
+
+<text x="28" y="212" font-size="13" font-weight="600">Guess: 450 tokens × 3 chars</text>
+<text x="28" y="230" font-size="12" class="t2">+ heading trail; 10.7 % of chunks over</text>
+<rect class="read" x="260" y="198" width="256" height="34" rx="3"/>
+<rect class="lost" x="516" y="198" width="20" height="34"/>
+<text x="548" y="220" font-size="13" font-weight="700" class="bad">tails still cut on 1 chunk in 9</text>
+
+<text x="28" y="292" font-size="13" font-weight="600">Measured: tokenizer sizes chunks</text>
+<text x="28" y="310" font-size="12" class="t2">400 tokens + heading trail</text>
+<rect class="read" x="260" y="278" width="215" height="34" rx="3"/>
+<text x="548" y="300" font-size="13" font-weight="700" class="ok">0 chunks over the window</text>
+
+<text x="28" y="372" font-size="12" class="t2">Nothing fails loudly: the vector is computed, it just describes the first half. A fact in the tail is invisible to vector search.</text>
+</svg>

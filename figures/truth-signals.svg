@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" width="960" height="470" role="img" aria-labelledby="title desc" class="root">
+<title id="title">From document signals to truth classes to weights</title>
+<desc id="desc">Signals that documents already carry map to five truth classes. A STATE header or accepted status maps to current, weight 1.0. A log's current-state section maps to log current, weight 1.0. A REFERENCE header or vendor datasheet maps to reference, weight 0.9. A LOG header, work diary, test log or proposed status maps to history, weight 0.5. An archive folder or superseded or deprecated status maps to archive, weight 0.2. Retired wording in any chunk multiplies its weight by 0.5.</desc>
+<style>
+  .root { --surface:#fcfcfb; --box:#f3f2ee; --t1:#0b0b0b; --t2:#52514e; --line:#b9b8b2;
+          --cur:#0a6b37; --curbg:#d7f0df; --ref:#2a78d6; --refbg:#e3eefb; --hist:#8a5300; --histbg:#fbe8c4;
+          --arch:#b02a2a; --archbg:#f8dcdc; }
+  @media (prefers-color-scheme: dark) {
+    .root { --surface:#1a1a19; --box:#262624; --t1:#f0efec; --t2:#c3c2b7; --line:#5a5955;
+            --cur:#7ad69c; --curbg:#173323; --ref:#5b9ded; --refbg:#1d2a3b; --hist:#f0b95a; --histbg:#3a2c12;
+            --arch:#f08a8a; --archbg:#3d1c1c; }
+  }
+  text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--t1); }
+  .t2 { fill: var(--t2); } .mono, .mono text { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-variant-ligatures: none; }
+  .sig { fill: var(--box); stroke: var(--line); }
+  .wire { stroke: var(--line); stroke-width: 1.5; fill: none; }
+  .c-cur { fill: var(--curbg); stroke: var(--cur); } .t-cur { fill: var(--cur); }
+  .c-ref { fill: var(--refbg); stroke: var(--ref); } .t-ref { fill: var(--ref); }
+  .c-hist { fill: var(--histbg); stroke: var(--hist); } .t-hist { fill: var(--hist); }
+  .c-arch { fill: var(--archbg); stroke: var(--arch); } .t-arch { fill: var(--arch); }
+</style>
+<rect width="960" height="470" rx="10" fill="var(--surface)"/>
+<text x="28" y="38" font-size="18" font-weight="600">Most documents already say how current they are</text>
+<g font-size="12" font-weight="700" class="t2">
+  <text x="28" y="72">SIGNAL IN YOUR DOCUMENTS</text><text x="472" y="72">TRUTH CLASS</text><text x="800" y="72">WEIGHT</text>
+</g>
+
+<!-- signals: x 28..388 -->
+<g font-size="12">
+  <rect class="sig" x="28" y="86" width="360" height="34" rx="6"/><text x="40" y="108" class="mono">&lt;!-- CONTRACT: STATE --&gt;</text><text x="250" y="108" class="t2">status header</text>
+  <rect class="sig" x="28" y="128" width="360" height="34" rx="6"/><text x="40" y="150" class="mono">status: accepted</text><text x="250" y="150" class="t2">ADR front matter</text>
+  <rect class="sig" x="28" y="170" width="360" height="34" rx="6"/><text x="40" y="192" class="mono">## §0 CURRENT STATE</text><text x="250" y="192" class="t2">inside a log</text>
+  <rect class="sig" x="28" y="212" width="360" height="34" rx="6"/><text x="40" y="234" class="mono">REFERENCE</text><text x="250" y="234" class="t2">datasheet, vendor note</text>
+  <rect class="sig" x="28" y="254" width="360" height="34" rx="6"/><text x="40" y="276" class="mono">LOG · status: proposed</text><text x="250" y="276" class="t2">diary, test log, draft</text>
+  <rect class="sig" x="28" y="296" width="360" height="34" rx="6"/><text x="40" y="318" class="mono">archive/ · old/</text><text x="250" y="318" class="t2">folder</text>
+  <rect class="sig" x="28" y="338" width="360" height="34" rx="6"/><text x="40" y="360" class="mono">status: superseded</text><text x="250" y="360" class="t2">ADR, wiki label</text>
+</g>
+
+<!-- classes: x 472..712 -->
+<rect class="c-cur" x="472" y="96" width="240" height="56" rx="8"/>
+<text x="488" y="120" font-size="14" font-weight="700" class="t-cur">current</text><text x="488" y="140" font-size="11" class="t2">true now</text>
+<rect class="c-cur" x="472" y="166" width="240" height="42" rx="8"/>
+<text x="488" y="192" font-size="14" font-weight="700" class="t-cur">log, current section</text>
+<rect class="c-ref" x="472" y="214" width="240" height="42" rx="8"/>
+<text x="488" y="240" font-size="14" font-weight="700" class="t-ref">external reference</text>
+<rect class="c-hist" x="472" y="262" width="240" height="42" rx="8"/>
+<text x="488" y="288" font-size="14" font-weight="700" class="t-hist">history</text>
+<rect class="c-arch" x="472" y="312" width="240" height="56" rx="8"/>
+<text x="488" y="336" font-size="14" font-weight="700" class="t-arch">archive</text><text x="488" y="356" font-size="11" class="t2">never a source of current values</text>
+
+<!-- wires -->
+<path class="wire" d="M388,103 C430,103 430,118 470,118"/>
+<path class="wire" d="M388,145 C430,145 430,132 470,132"/>
+<path class="wire" d="M388,187 H470"/>
+<path class="wire" d="M388,229 C430,229 430,235 470,235"/>
+<path class="wire" d="M388,271 C430,271 430,283 470,283"/>
+<path class="wire" d="M388,313 C430,313 430,333 470,333"/>
+<path class="wire" d="M388,355 C430,355 430,345 470,345"/>
+
+<!-- weights -->
+<g font-size="20" font-weight="700">
+  <text x="800" y="132" class="t-cur">1.0</text><text x="800" y="194" class="t-cur">1.0</text>
+  <text x="800" y="242" class="t-ref">0.9</text><text x="800" y="290" class="t-hist">0.5</text>
+  <text x="800" y="347" class="t-arch">0.2</text>
+</g>
+<path class="wire" d="M712,124 H790"/><path class="wire" d="M712,187 H790"/><path class="wire" d="M712,235 H790"/>
+<path class="wire" d="M712,283 H790"/><path class="wire" d="M712,340 H790"/>
+
+<rect class="sig" x="472" y="388" width="440" height="40" rx="8"/>
+<text x="488" y="413" font-size="13"><tspan font-weight="700">× 0.5 more</tspan> for any chunk that states wording a decision retired</text>
+<text x="28" y="452" font-size="12" class="t2">Precedence: archive folder &gt; front matter &gt; header &gt; default. All of it is configuration — map the signals your documents carry.</text>
+</svg>

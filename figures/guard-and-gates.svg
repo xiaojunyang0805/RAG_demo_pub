@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" width="960" height="440" role="img" aria-labelledby="title desc" class="root">
+<title id="title">Cite or refuse, a guard, and two redaction gates</title>
+<desc id="desc">Ingest gate: confidential names become tags before anything is indexed, in text and in file paths. At question time, if no retrieved chunk is close enough, the answer is "not in the corpus" with no model call. Otherwise Claude gets labelled sources and must return a structured answer with citations, or not_in_corpus. The guard checks that every citation points at a retrieved chunk and that no redacted name appears. A publish gate removes names that are allowed internally but not in published output.</desc>
+<style>
+  .root { --surface:#fcfcfb; --box:#f3f2ee; --t1:#0b0b0b; --t2:#52514e; --line:#b9b8b2; --acc:#2a78d6; --accbg:#e3eefb;
+          --gate:#6250d6; --gatebg:#ebe8fb; --no:#b02a2a; --nobg:#f8dcdc; --ok:#0a6b37; --okbg:#d7f0df; }
+  @media (prefers-color-scheme: dark) {
+    .root { --surface:#1a1a19; --box:#262624; --t1:#f0efec; --t2:#c3c2b7; --line:#5a5955; --acc:#5b9ded; --accbg:#1d2a3b;
+            --gate:#9085e9; --gatebg:#26223f; --no:#f08a8a; --nobg:#3d1c1c; --ok:#7ad69c; --okbg:#173323; }
+  }
+  text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--t1); }
+  .t2 { fill: var(--t2); } .mono, .mono text { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-variant-ligatures: none; }
+  .box { fill: var(--box); stroke: var(--line); } .acc { fill: var(--accbg); stroke: var(--acc); stroke-width: 1.5; }
+  .gate { fill: var(--gatebg); stroke: var(--gate); stroke-width: 1.5; } .gate-t { fill: var(--gate); }
+  .no { fill: var(--nobg); stroke: var(--no); } .no-t { fill: var(--no); } .ok { fill: var(--okbg); stroke: var(--ok); } .ok-t { fill: var(--ok); }
+  .arrow { stroke: var(--line); stroke-width: 1.5; fill: none; marker-end: url(#h); }
+</style>
+<defs><marker id="h" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="var(--line)"/></marker></defs>
+<rect width="960" height="440" rx="10" fill="var(--surface)"/>
+<text x="28" y="38" font-size="18" font-weight="600">Cite or refuse — then check, never trust</text>
+
+<!-- ingest gate -->
+<rect class="gate" x="28" y="62" width="904" height="56" rx="8"/>
+<text x="44" y="86" font-size="14" font-weight="700" class="gate-t">Gate 1 · at ingest</text>
+<text x="44" y="106" font-size="12" class="t2">Confidential names → tags (<tspan class="mono">[customer]</tspan>, <tspan class="mono">[engineer]</tspan>) in text <tspan font-weight="700">and file paths</tspan>, before anything is stored. The index never holds them.</text>
+
+<!-- flow -->
+<rect class="box" x="28" y="160" width="120" height="64" rx="8"/><text x="88" y="197" font-size="14" font-weight="600" text-anchor="middle">Question</text>
+<rect class="box" x="178" y="160" width="140" height="64" rx="8"/><text x="248" y="188" font-size="14" font-weight="600" text-anchor="middle">Retrieve</text><text x="248" y="207" font-size="11" class="t2" text-anchor="middle">truth-weighted</text>
+<rect class="box" x="348" y="152" width="150" height="80" rx="8"/><text x="423" y="182" font-size="13" font-weight="600" text-anchor="middle">Anything close?</text><text x="423" y="200" font-size="11" class="t2" text-anchor="middle">best similarity,</text><text x="423" y="214" font-size="11" class="t2" text-anchor="middle">or an exact ID</text>
+<rect class="acc" x="528" y="148" width="200" height="88" rx="8"/><text x="628" y="172" font-size="14" font-weight="600" text-anchor="middle">Claude</text><text x="628" y="191" font-size="11" class="t2" text-anchor="middle">sources labelled by truth class;</text><text x="628" y="205" font-size="11" class="t2" text-anchor="middle">JSON: answer · citations ·</text><text x="628" y="219" font-size="11" class="t2" text-anchor="middle">superseded · not_in_corpus</text>
+<rect class="box" x="758" y="148" width="174" height="88" rx="8"/><text x="845" y="172" font-size="14" font-weight="600" text-anchor="middle">Guard</text><text x="845" y="192" font-size="11" class="t2" text-anchor="middle">every [n] a retrieved chunk?</text><text x="845" y="207" font-size="11" class="t2" text-anchor="middle">any redacted name?</text><text x="845" y="222" font-size="11" class="t2" text-anchor="middle">issues are reported, counted</text>
+
+<path class="arrow" d="M148,192 H176"/><path class="arrow" d="M318,192 H346"/><path class="arrow" d="M498,192 H526"/><path class="arrow" d="M728,192 H756"/>
+<text x="512" y="182" font-size="10" class="t2" text-anchor="middle">yes</text>
+
+<rect class="no" x="348" y="270" width="150" height="56" rx="8"/><text x="423" y="294" font-size="13" font-weight="700" class="no-t" text-anchor="middle">Not in the corpus</text><text x="423" y="312" font-size="11" class="t2" text-anchor="middle">no model call</text>
+<path class="arrow" d="M423,232 V268"/><text x="432" y="254" font-size="10" class="t2">no</text>
+<path class="arrow" d="M628,236 V280 H500"/><text x="636" y="262" font-size="10" class="t2">model: not_in_corpus</text>
+
+<rect class="ok" x="758" y="270" width="174" height="56" rx="8"/><text x="845" y="294" font-size="13" font-weight="700" class="ok-t" text-anchor="middle">Cited answer</text><text x="845" y="312" font-size="11" class="t2" text-anchor="middle">+ "superseded: …" note</text>
+<path class="arrow" d="M845,236 V268"/>
+
+<!-- publish gate -->
+<rect class="gate" x="28" y="356" width="904" height="56" rx="8"/>
+<text x="44" y="380" font-size="14" font-weight="700" class="gate-t">Gate 2 · at publish</text>
+<text x="44" y="400" font-size="12" class="t2">Names that are facts inside the team (a vendor, a product) stay in the index and are replaced only in output that leaves it — recordings, reports.</text>
+</svg>

@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400" role="img" aria-labelledby="title desc" class="root">
+<title id="title">The life of one value</title>
+<desc id="desc">The Halyard phase current limit. January to February 2026, four documents state 25 A: the power-stage concept, the decision log's early estimate, the HB-P bring-up worknote and the pilot proposal. On 14 May the stall test measures 31.2 A and decision D8 sets 32 A; the parameter table, the design notes, the commissioning guide and the logs' current sections state 32 A. Afterwards 11 chunks still state 25 A, all of them history, and 18 chunks state 32 A.</desc>
+<style>
+  .root { --surface:#fcfcfb; --t1:#0b0b0b; --t2:#52514e; --line:#b9b8b2;
+          --old:#8a5300; --oldbg:#fbe8c4; --new:#0a6b37; --newbg:#d7f0df; --ev:#2a78d6; }
+  @media (prefers-color-scheme: dark) {
+    .root { --surface:#1a1a19; --t1:#f0efec; --t2:#c3c2b7; --line:#5a5955;
+            --old:#f0b95a; --oldbg:#3a2c12; --new:#7ad69c; --newbg:#173323; --ev:#5b9ded; }
+  }
+  text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--t1); }
+  .t2 { fill: var(--t2); } .axis { stroke: var(--line); stroke-width: 2; } .tick { stroke: var(--line); }
+  .old { fill: var(--oldbg); stroke: var(--old); } .old-t { fill: var(--old); }
+  .new { fill: var(--newbg); stroke: var(--new); } .new-t { fill: var(--new); }
+  .stem-old { stroke: var(--old); } .stem-new { stroke: var(--new); }
+  .ev { stroke: var(--ev); stroke-width: 2; stroke-dasharray: 5 4; } .ev-t { fill: var(--ev); }
+</style>
+<rect width="960" height="400" rx="10" fill="var(--surface)"/>
+<text x="28" y="38" font-size="18" font-weight="600">The life of one value: the phase current limit</text>
+<text x="28" y="60" font-size="12" class="t2">Halyard example corpus, 2026. Each card is a document and the value it states.</text>
+
+<!-- axis: Jan 1 at x=90, 150 px per month -->
+<line class="axis" x1="60" x2="920" y1="250" y2="250"/>
+<g font-size="12" text-anchor="middle">
+  <line class="tick" x1="90" x2="90" y1="244" y2="256"/><text x="90" y="274" class="t2">Jan</text>
+  <line class="tick" x1="240" x2="240" y1="244" y2="256"/><text x="240" y="274" class="t2">Feb</text>
+  <line class="tick" x1="390" x2="390" y1="244" y2="256"/><text x="390" y="274" class="t2">Mar</text>
+  <line class="tick" x1="540" x2="540" y1="244" y2="256"/><text x="540" y="274" class="t2">Apr</text>
+  <line class="tick" x1="690" x2="690" y1="244" y2="256"/><text x="690" y="274" class="t2">May</text>
+  <line class="tick" x1="840" x2="840" y1="244" y2="256"/><text x="840" y="274" class="t2">Jun</text>
+</g>
+
+<!-- 25 A documents, Jan-Feb -->
+<line class="stem-old" x1="150" x2="150" y1="150" y2="250"/>
+<rect class="old" x="40" y="88" width="160" height="62" rx="6"/>
+<text x="52" y="108" font-size="12" font-weight="600">Power-stage concept</text>
+<text x="52" y="124" font-size="11" class="t2">archive/, January</text>
+<text x="52" y="142" font-size="13" font-weight="700" class="old-t">25 A (estimate)</text>
+
+<line class="stem-old" x1="290" x2="290" y1="150" y2="250"/>
+<rect class="old" x="214" y="88" width="160" height="62" rx="6"/>
+<text x="226" y="108" font-size="12" font-weight="600">Decision log §1</text>
+<text x="226" y="124" font-size="11" class="t2">early decisions, 10 Feb</text>
+<text x="226" y="142" font-size="13" font-weight="700" class="old-t">25 A</text>
+
+<line class="stem-old" x1="310" x2="250" y1="250" y2="300"/>
+<rect class="old" x="140" y="300" width="160" height="62" rx="6"/>
+<text x="152" y="320" font-size="12" font-weight="600">HB-P worknote §1</text>
+<text x="152" y="336" font-size="11" class="t2">Rev A bring-up, Feb</text>
+<text x="152" y="354" font-size="13" font-weight="700" class="old-t">25 A</text>
+
+<line class="stem-old" x1="330" x2="370" y1="250" y2="300"/>
+<rect class="old" x="314" y="300" width="160" height="62" rx="6"/>
+<text x="326" y="320" font-size="12" font-weight="600">Pilot proposal</text>
+<text x="326" y="336" font-size="11" class="t2">archive/, Feb</text>
+<text x="326" y="354" font-size="13" font-weight="700" class="old-t">25 A</text>
+
+<!-- the measurement -->
+<line class="ev" x1="755" x2="755" y1="80" y2="250"/>
+<circle cx="755" cy="250" r="6" fill="var(--ev)"/>
+<text x="745" y="96" font-size="12" font-weight="700" class="ev-t" text-anchor="end">14 May: stall test measures 31.2 A</text>
+<text x="745" y="113" font-size="12" class="ev-t" text-anchor="end">decision D8 → limit 32 A</text>
+
+<!-- 32 A documents, May-Jun -->
+<line class="stem-new" x1="860" x2="860" y1="210" y2="250"/>
+<rect class="new" x="770" y="148" width="166" height="62" rx="6"/>
+<text x="782" y="168" font-size="12" font-weight="600">Logs' §0 sections</text>
+<text x="782" y="184" font-size="11" class="t2">current state, June</text>
+<text x="782" y="202" font-size="13" font-weight="700" class="new-t">32 A</text>
+
+<line class="stem-new" x1="800" x2="800" y1="250" y2="300"/>
+<rect class="new" x="770" y="300" width="166" height="62" rx="6"/>
+<text x="782" y="320" font-size="12" font-weight="600">Spec documents</text>
+<text x="782" y="336" font-size="11" class="t2">parameters, notes, guide</text>
+<text x="782" y="354" font-size="13" font-weight="700" class="new-t">32 A (measured)</text>
+
+<!-- tally -->
+<text x="420" y="160" font-size="13" font-weight="600">Afterwards, in the index:</text>
+<text x="420" y="182" font-size="13"><tspan font-weight="700" class="old-t">11 chunks</tspan> still state 25 A — all history</text>
+<text x="420" y="202" font-size="13"><tspan font-weight="700" class="new-t">18 chunks</tspan> state 32 A</text>
+<text x="420" y="222" font-size="11" class="t2">The history is right to keep it. The fix belongs in retrieval.</text>
+</svg>

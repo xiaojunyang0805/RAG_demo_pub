@@ -30,7 +30,7 @@
 <path class="s1" d="M104.25,358 V215.33333333333334 Q104.25,211.33333333333334 108.25,211.33333333333334 H122.25 Q126.25,211.33333333333334 126.25,215.33333333333334 V358 Z"><title>Example corpus (Halyard) · BM25 · hit@5: 0.67</title></path>
 <path class="s2" d="M128.25,358 V334.5 Q128.25,330.5 132.25,330.5 H146.25 Q150.25,330.5 150.25,334.5 V358 Z"><title>Example corpus (Halyard) · BM25 · stale-truth: 0.12</title></path>
 <text x="127.25" y="378" font-size="12" text-anchor="middle" class="t2">BM25</text>
-<path class="s1" d="M198.75,358 V183.9047619047619 Q198.75,179.9047619047619 202.75,179.9047619047619 H216.75 Q220.75,179.9047619047619 220.75,183.9047619047619 V358 Z"><title>Example corpus (Halyard) · vector · hit@5: 0.81</title></path>
+<path class="s1" d="M198.75,358 V173.42857142857144 Q198.75,169.42857142857144 202.75,169.42857142857144 H216.75 Q220.75,169.42857142857144 220.75,173.42857142857144 V358 Z"><title>Example corpus (Halyard) · vector · hit@5: 0.86</title></path>
 <path class="s2" d="M222.75,358 V334.5 Q222.75,330.5 226.75,330.5 H240.75 Q244.75,330.5 244.75,334.5 V358 Z"><title>Example corpus (Halyard) · vector · stale-truth: 0.12</title></path>
 <text x="221.75" y="378" font-size="12" text-anchor="middle" class="t2">vector</text>
 <path class="s1" d="M293.25,358 V183.9047619047619 Q293.25,179.9047619047619 297.25,179.9047619047619 H311.25 Q315.25,179.9047619047619 315.25,183.9047619047619 V358 Z"><title>Example corpus (Halyard) · hybrid · hit@5: 0.81</title></path>

@@ -3,9 +3,10 @@
 **Retrieval that knows current facts from superseded ones.**
 
 Engineering documents change. A parameter starts as an estimate, gets measured, gets decided — and the old value
-lives on in worknotes, test logs, archived plans and early proposals. There are usually *more* copies of the old
-value than the new one. A retrieval system that ranks by similarity alone will happily hand the old value to the
-model, and the model will state it with full confidence and a citation.
+lives on in worknotes, test logs, archived plans and early proposals. Those documents state it plainly, often in
+exactly the words people ask with ("the phase current limit is 25 A"), while the current value sits in a parameter
+table. A retrieval system that ranks by similarity alone will happily hand the old value to the model, and the
+model will state it with full confidence and a citation.
 
 ![Same question, two retrievals: plain hybrid retrieval returns three history chunks that say 25 A; truth-aware retrieval returns three current chunks that say 32 A](figures/hero-two-answers.svg)
 
@@ -28,7 +29,7 @@ This repo shows a small, transplantable fix — and how to measure it.
 
 | Corpus | Retrieval | hit@5 | MRR | stale-truth |
 |---|---|---|---|---|
-| Example (Halyard, synthetic) | hybrid | 0.81 | 0.61 | 0.12 |
+| Example (Halyard, synthetic) | hybrid | 0.81 | 0.64 | 0.12 |
 | | **hybrid + truth** | **0.90** | **0.84** | **1.00** |
 | Real hardware project (121 docs, private) | hybrid | 0.62 | 0.44 | 0.78 |
 | | **hybrid + truth** | **0.93** | **0.72** | **0.89** |
@@ -44,7 +45,7 @@ of the gain comes from the definition. A cross-encoder reranker added nothing on
 ```bash
 pip install -e .
 cd examples/halyard
-truthrag ingest                                         # classify, redact, chunk  (20 docs → 90 chunks)
+truthrag ingest                                         # classify, redact, chunk  (20 docs → 91 chunks)
 truthrag index                                          # embed on CPU, ~15 s the first time
 truthrag search "What is the phase current limit?" --mode hybrid
 truthrag search "What is the phase current limit?"      # truth-aware (default)
@@ -71,13 +72,15 @@ truth:
   retired_terms: docs/RetiredTerms.md                    # optional: wording a decision made wrong
 ```
 
-A step-by-step transplant guide, with examples for ADR repositories, wikis, regulated design files and runbooks,
-is in progress (`docs/`).
+**The guide, [`docs/`](docs/README.md)**, explains each part — why living documents break RAG, where truth metadata
+comes from, the pipeline, chunking lessons, evaluation, tracking a live corpus, responsible answers. A transplant
+guide for ADR repositories, wikis, regulated design files and runbooks is next.
 
 ## What is in the repo
 
 | Path | What |
 |---|---|
+| `docs/` | The guide: seven pages, each with a figure |
 | `src/truthrag/` | The package: truth classifier, chunker, redaction, hybrid index, truth-weighted retrieval, Claude answer + guard, evaluation |
 | `examples/halyard/` | A synthetic 20-document project (a 48 V motor-controller board) with planted superseded values, a golden set, and a config |
 | `figures/` | Every figure as SVG; `scripts/plot_ablation.py` regenerates the chart from `truthrag eval --json` |
