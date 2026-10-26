@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" width="960" height="420" role="img" aria-labelledby="title desc" class="root">
+<title id="title">truthrag pipeline</title>
+<desc id="desc">Ingest lane: documents, truth classifier, chunker, redaction, then a BM25 index and a vector index. Query lane: question, BM25 and vector search, rank fusion, truth weight, optional cross-encoder, Claude answers with citations or refuses, guard checks citations and names, answer. Truth metadata is created by the classifier and used by the truth weight and the answer prompt.</desc>
+<style>
+  .root { --surface:#fcfcfb; --box:#f3f2ee; --t1:#0b0b0b; --t2:#52514e; --line:#b9b8b2; --accent:#2a78d6; --accbg:#e3eefb; }
+  @media (prefers-color-scheme: dark) {
+    .root { --surface:#1a1a19; --box:#262624; --t1:#f0efec; --t2:#c3c2b7; --line:#5a5955; --accent:#5b9ded; --accbg:#1d2a3b; }
+  }
+  text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--t1); }
+  .t2 { fill: var(--t2); }
+  .box { fill: var(--box); stroke: var(--line); }
+  .acc { fill: var(--accbg); stroke: var(--accent); stroke-width: 1.5; }
+  .acc-t { fill: var(--accent); }
+  .arrow { stroke: var(--line); stroke-width: 1.5; fill: none; marker-end: url(#head); }
+  .lane { fill: none; stroke: var(--line); stroke-dasharray: 4 4; }
+</style>
+<defs>
+  <marker id="head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,0 L10,5 L0,10 z" fill="var(--line)"/>
+  </marker>
+</defs>
+<rect width="960" height="420" rx="10" fill="var(--surface)"/>
+
+<!-- ingest lane -->
+<text x="28" y="34" font-size="12" font-weight="700" class="t2">INGEST · once per corpus version</text>
+<rect class="lane" x="20" y="44" width="920" height="134" rx="8"/>
+
+<rect class="box" x="36" y="66" width="128" height="88" rx="8"/>
+<text x="100" y="98" font-size="14" font-weight="600" text-anchor="middle">Documents</text>
+<text x="100" y="118" font-size="11" class="t2" text-anchor="middle">Markdown, read</text>
+<text x="100" y="133" font-size="11" class="t2" text-anchor="middle">in place</text>
+
+<rect class="acc" x="188" y="66" width="168" height="88" rx="8"/>
+<text x="272" y="94" font-size="14" font-weight="600" text-anchor="middle" class="acc-t">Truth classifier</text>
+<text x="272" y="113" font-size="11" class="t2" text-anchor="middle">header · front matter</text>
+<text x="272" y="127" font-size="11" class="t2" text-anchor="middle">archive folder · log §0</text>
+<text x="272" y="141" font-size="11" class="t2" text-anchor="middle">retired wording</text>
+
+<rect class="box" x="380" y="66" width="150" height="88" rx="8"/>
+<text x="455" y="98" font-size="14" font-weight="600" text-anchor="middle">Chunker</text>
+<text x="455" y="118" font-size="11" class="t2" text-anchor="middle">by heading, tables whole,</text>
+<text x="455" y="133" font-size="11" class="t2" text-anchor="middle">≤ embedder window</text>
+
+<rect class="box" x="554" y="66" width="140" height="88" rx="8"/>
+<text x="624" y="98" font-size="14" font-weight="600" text-anchor="middle">Redact</text>
+<text x="624" y="118" font-size="11" class="t2" text-anchor="middle">names → tags, in</text>
+<text x="624" y="133" font-size="11" class="t2" text-anchor="middle">text and file paths</text>
+
+<rect class="box" x="718" y="66" width="206" height="88" rx="8"/>
+<text x="821" y="98" font-size="14" font-weight="600" text-anchor="middle">Index</text>
+<text x="821" y="118" font-size="11" class="t2" text-anchor="middle">BM25 (exact IDs, part numbers)</text>
+<text x="821" y="133" font-size="11" class="t2" text-anchor="middle">+ vectors (paraphrase), cached</text>
+
+<path class="arrow" d="M164,110 H186"/><path class="arrow" d="M356,110 H378"/>
+<path class="arrow" d="M530,110 H552"/><path class="arrow" d="M694,110 H716"/>
+
+<!-- query lane -->
+<text x="28" y="214" font-size="12" font-weight="700" class="t2">QUERY · every question</text>
+<rect class="lane" x="20" y="224" width="920" height="150" rx="8"/>
+
+<rect class="box" x="36" y="252" width="104" height="92" rx="8"/>
+<text x="88" y="303" font-size="14" font-weight="600" text-anchor="middle">Question</text>
+
+<rect class="box" x="160" y="252" width="132" height="92" rx="8"/>
+<text x="226" y="286" font-size="14" font-weight="600" text-anchor="middle">Hybrid search</text>
+<text x="226" y="306" font-size="11" class="t2" text-anchor="middle">BM25 + vectors,</text>
+<text x="226" y="320" font-size="11" class="t2" text-anchor="middle">rank fusion (RRF)</text>
+
+<rect class="acc" x="312" y="252" width="172" height="92" rx="8"/>
+<text x="398" y="280" font-size="14" font-weight="600" text-anchor="middle" class="acc-t">× Truth weight</text>
+<text x="398" y="299" font-size="11" class="t2" text-anchor="middle">current 1.0 · external 0.9</text>
+<text x="398" y="313" font-size="11" class="t2" text-anchor="middle">history 0.5 · archive 0.2</text>
+<text x="398" y="327" font-size="11" class="t2" text-anchor="middle">retired wording × 0.5</text>
+
+<rect class="box" x="504" y="252" width="124" height="92" rx="8" stroke-dasharray="4 3"/>
+<text x="566" y="292" font-size="13" font-weight="600" text-anchor="middle">Cross-encoder</text>
+<text x="566" y="311" font-size="11" class="t2" text-anchor="middle">optional</text>
+
+<rect class="box" x="648" y="252" width="142" height="92" rx="8"/>
+<text x="719" y="280" font-size="14" font-weight="600" text-anchor="middle">Claude</text>
+<text x="719" y="299" font-size="11" class="t2" text-anchor="middle">sources labelled</text>
+<text x="719" y="313" font-size="11" class="t2" text-anchor="middle">CURRENT / HISTORY;</text>
+<text x="719" y="327" font-size="11" class="t2" text-anchor="middle">cite every claim — or refuse</text>
+
+<rect class="box" x="810" y="252" width="114" height="92" rx="8"/>
+<text x="867" y="284" font-size="14" font-weight="600" text-anchor="middle">Guard</text>
+<text x="867" y="303" font-size="11" class="t2" text-anchor="middle">citations real?</text>
+<text x="867" y="317" font-size="11" class="t2" text-anchor="middle">names leaked?</text>
+
+<path class="arrow" d="M140,298 H158"/><path class="arrow" d="M292,298 H310"/>
+<path class="arrow" d="M484,298 H502"/><path class="arrow" d="M628,298 H646"/><path class="arrow" d="M790,298 H808"/>
+<!-- index feeds search -->
+<path class="arrow" d="M821,154 V196 H226 V250"/>
+
+<text x="28" y="404" font-size="12" class="t2">Blue: where truth metadata is made and where it is used. Everything else is a standard hybrid RAG — truth enters as one multiplicative weight.</text>
+</svg>

@@ -1,0 +1,9 @@
+# Fictional names, so the example shows both redaction gates. In a real project this file holds real names and
+# must be gitignored.
+
+ingest:                     # removed before indexing: the index never holds these
+  "[customer]": ["Brightwater Robotics", "Brightwater"]
+  "[engineer]": ["Mara Velden", "Joris Kant"]
+
+public:                     # kept in the index, removed from anything published (answers with --public)
+  "[vendor]": ["Tessaro"]

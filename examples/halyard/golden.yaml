@@ -1,0 +1,60 @@
+# Golden set for the Halyard example.
+#   evidence      regex a relevant chunk must match (current truth unless evidence_truth: any)
+#   evidence_all  multi-hop: each regex matched by some top-5 chunk
+#   must          regexes the answer must all contain
+#   stale         the superseded value; a line states it unless it marks itself as history
+#   absent        refusal questions: must match no chunk (checked by `truthrag eval --check`)
+
+questions:
+- {id: F01, category: fact, question: "What current-sense shunt does the power stage use?",
+   evidence: '1 ?mΩ', must: ['1 ?mΩ']}
+- {id: F02, category: fact, question: "Which gate driver is on HB-P?",
+   evidence: 'GD-22', must: ['GD-22']}
+- {id: F03, category: fact, question: "How big is the HB-P board?",
+   evidence: '110 × 80 mm', must: ['110 ?× ?80']}
+- {id: F04, category: fact, question: "What is the encoder resolution?",
+   evidence: '4096', must: ['4096']}
+- {id: F05, category: fact, question: "What voltage does the brake output switch?",
+   evidence: '24 V brake', must: ['24 ?V']}
+- {id: F06, category: fact, question: "After how long without CAN messages does the drive stop?",
+   evidence: '50 ms', must: ['50 ?ms']}
+
+- {id: E01, category: exact_id, question: "What fixed PW-O7?",
+   evidence: 'PW-O7', evidence_truth: any, must: ['4\.7 ?Ω']}
+- {id: E02, category: exact_id, question: "What was wrong in CT-O3 and how was it fixed?",
+   evidence: 'CT-O3', evidence_truth: any, must: ['(?i)CRC']}
+- {id: E03, category: exact_id, question: "What does decision D12 say?",
+   evidence: 'D12', evidence_truth: any, must: ['7\.62']}
+- {id: E04, category: exact_id, question: "What was SH-O2?",
+   evidence: 'SH-O2', evidence_truth: any, must: ['(?i)encoder']}
+
+- {id: S01, category: stale, question: "What is the phase current limit?",
+   evidence: '32 ?A', must: ['32 ?A'], stale: '25 ?A'}
+- {id: S02, category: stale, question: "What PWM frequency does Halyard use?",
+   evidence: '24 ?kHz', must: ['24 ?kHz'], stale: '20 ?kHz'}
+- {id: S03, category: stale, question: "How much DC-link capacitance does the power stage have?",
+   evidence: '680 ?µF', must: ['680'], stale: '470 ?µF'}
+- {id: S04, category: stale, question: "At what heat-sink temperature does the drive shut down?",
+   evidence: '95 ?°C', must: ['95 ?°C'], stale: '105 ?°C'}
+- {id: S05, category: stale, question: "What is the CAN bit rate?",
+   evidence: '1 ?Mbit/s', must: ['1 ?Mbit'], stale: '500 ?kbit/s'}
+- {id: S06, category: stale, question: "Which MCU does the controller use?",
+   evidence: 'C4-180', must: ['C4-180'], stale: 'C4-120'}
+- {id: S07, category: stale, question: "What interface connects the encoder?",
+   evidence: 'RS-485', must: ['RS-485'], stale: '(?i)encoder[^\n]{0,40}SPI|SPI[^\n]{0,40}encoder'}
+- {id: S08, category: stale, question: "What motor connector does HB-P use?",
+   evidence: '7\.62 ?mm', must: ['7\.62'], stale: '5\.08 ?mm'}
+
+- {id: M01, category: multihop, question: "Why does Halyard switch at 24 kHz rather than 20 kHz?",
+   evidence_all: ['(?i)audib|whine|resonat', '1\.1 W'], must: ['(?i)audib|whine|resonan|hear']}
+- {id: M02, category: multihop, question: "Why is the thermal shutdown set by the capacitors rather than the MOSFETs?",
+   evidence_all: ['12 mm', '(?i)lifetime|life halves'], must: ['(?i)capacitor']}
+- {id: M03, category: multihop, question: "Why did raising the current limit force a new motor connector?",
+   evidence_all: ['31\.2 ?A', '41 ?A|24 ?A'], must: ['(?i)rat(ed|ing)']}
+
+- {id: R01, category: refusal, question: "What does one Halyard drive cost?", absent: '(?i)(€|\$|EUR|USD) ?\d|price'}
+- {id: R02, category: refusal, question: "How long is the warranty on a Halyard drive?", absent: '(?i)warranty'}
+- {id: R03, category: refusal, question: "Which EtherCAT stack does the controller run?", absent: '(?i)EtherCAT'}
+
+- {id: X01, category: redaction, question: "Which company is the pilot customer?"}
+- {id: X02, category: redaction, question: "Who prepared the pilot proposal?"}

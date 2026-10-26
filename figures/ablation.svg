@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 450" width="960" height="450" role="img" aria-labelledby="title desc" class="root">
+<title id="title">Retrieval ablation: truth weighting</title>
+<desc id="desc">Grouped bars of hit@5 and stale-truth for BM25, vector, hybrid and hybrid with truth weighting, on the example corpus and on a real project. Values are listed in the README table.</desc>
+<style>
+  .root { --surface:#fcfcfb; --t1:#0b0b0b; --t2:#52514e; --grid:#e3e2de; --band:#f1f0ec; --s1:#2a78d6; --s2:#eb6834; }
+  @media (prefers-color-scheme: dark) {
+    .root { --surface:#1a1a19; --t1:#f0efec; --t2:#c3c2b7; --grid:#33332f; --band:#242422; --s1:#3987e5; --s2:#d95926; }
+  }
+  text { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; fill: var(--t1); }
+  .t2 { fill: var(--t2); } .s1 { fill: var(--s1); } .s2 { fill: var(--s2); }
+  .grid { stroke: var(--grid); stroke-width: 1; } .base { stroke: var(--t2); stroke-width: 1; }
+</style>
+<rect width="960" height="450" rx="10" fill="var(--surface)"/>
+<text x="28" y="36" font-size="18" font-weight="600">Truth weighting puts the current value first</text>
+<rect x="28" y="52" width="12" height="12" rx="2" class="s1"/><text x="46" y="62" font-size="12">hit@5 — a relevant chunk in the top 5</text>
+<rect x="300" y="52" width="12" height="12" rx="2" class="s2"/><text x="318" y="62" font-size="12">stale-truth — the current value outranks the superseded one</text>
+<text x="28" y="92" font-size="15" font-weight="600">Example corpus (Halyard)</text>
+<text x="28" y="110" font-size="12" class="t2">20 documents · 21 questions (8 stale) · synthetic, built to show the effect</text>
+<rect x="367.5" y="130" width="86.5" height="228" rx="6" fill="var(--band)"/>
+<line class="base" x1="80" x2="458" y1="358" y2="358"/>
+<text x="72" y="362" font-size="11" class="t2" text-anchor="end">0.00</text>
+<line class="grid" x1="80" x2="458" y1="303.0" y2="303.0"/>
+<text x="72" y="307.0" font-size="11" class="t2" text-anchor="end">0.25</text>
+<line class="grid" x1="80" x2="458" y1="248.0" y2="248.0"/>
+<text x="72" y="252.0" font-size="11" class="t2" text-anchor="end">0.50</text>
+<line class="grid" x1="80" x2="458" y1="193.0" y2="193.0"/>
+<text x="72" y="197.0" font-size="11" class="t2" text-anchor="end">0.75</text>
+<line class="grid" x1="80" x2="458" y1="138.0" y2="138.0"/>
+<text x="72" y="142.0" font-size="11" class="t2" text-anchor="end">1.00</text>
+<path class="s1" d="M104.25,358 V215.33333333333334 Q104.25,211.33333333333334 108.25,211.33333333333334 H122.25 Q126.25,211.33333333333334 126.25,215.33333333333334 V358 Z"><title>Example corpus (Halyard) · BM25 · hit@5: 0.67</title></path>
+<path class="s2" d="M128.25,358 V334.5 Q128.25,330.5 132.25,330.5 H146.25 Q150.25,330.5 150.25,334.5 V358 Z"><title>Example corpus (Halyard) · BM25 · stale-truth: 0.12</title></path>
+<text x="127.25" y="378" font-size="12" text-anchor="middle" class="t2">BM25</text>
+<path class="s1" d="M198.75,358 V183.9047619047619 Q198.75,179.9047619047619 202.75,179.9047619047619 H216.75 Q220.75,179.9047619047619 220.75,183.9047619047619 V358 Z"><title>Example corpus (Halyard) · vector · hit@5: 0.81</title></path>
+<path class="s2" d="M222.75,358 V334.5 Q222.75,330.5 226.75,330.5 H240.75 Q244.75,330.5 244.75,334.5 V358 Z"><title>Example corpus (Halyard) · vector · stale-truth: 0.12</title></path>
+<text x="221.75" y="378" font-size="12" text-anchor="middle" class="t2">vector</text>
+<path class="s1" d="M293.25,358 V183.9047619047619 Q293.25,179.9047619047619 297.25,179.9047619047619 H311.25 Q315.25,179.9047619047619 315.25,183.9047619047619 V358 Z"><title>Example corpus (Halyard) · hybrid · hit@5: 0.81</title></path>
+<text x="304.25" y="173.9047619047619" font-size="11" text-anchor="middle">0.81</text>
+<path class="s2" d="M317.25,358 V334.5 Q317.25,330.5 321.25,330.5 H335.25 Q339.25,330.5 339.25,334.5 V358 Z"><title>Example corpus (Halyard) · hybrid · stale-truth: 0.12</title></path>
+<text x="328.25" y="324.5" font-size="11" text-anchor="middle">0.12</text>
+<text x="316.25" y="378" font-size="12" text-anchor="middle" class="t2">hybrid</text>
+<path class="s1" d="M387.75,358 V162.95238095238096 Q387.75,158.95238095238096 391.75,158.95238095238096 H405.75 Q409.75,158.95238095238096 409.75,162.95238095238096 V358 Z"><title>Example corpus (Halyard) · hybrid + truth · hit@5: 0.90</title></path>
+<text x="398.75" y="152.95238095238096" font-size="11" text-anchor="middle" font-weight="600">0.90</text>
+<path class="s2" d="M411.75,358 V142.0 Q411.75,138.0 415.75,138.0 H429.75 Q433.75,138.0 433.75,142.0 V358 Z"><title>Example corpus (Halyard) · hybrid + truth · stale-truth: 1.00</title></path>
+<text x="422.75" y="132.0" font-size="11" text-anchor="middle" font-weight="600">1.00</text>
+<text x="410.75" y="378" font-size="12" text-anchor="middle" font-weight="600">hybrid + truth</text>
+<text x="498" y="92" font-size="15" font-weight="600">Real project</text>
+<text x="498" y="110" font-size="12" class="t2">121-document hardware project · 29 questions (9 stale) · 2026-10-26</text>
+<rect x="837.5" y="130" width="86.5" height="228" rx="6" fill="var(--band)"/>
+<line class="base" x1="550" x2="928" y1="358" y2="358"/>
+<text x="542" y="362" font-size="11" class="t2" text-anchor="end">0.00</text>
+<line class="grid" x1="550" x2="928" y1="303.0" y2="303.0"/>
+<text x="542" y="307.0" font-size="11" class="t2" text-anchor="end">0.25</text>
+<line class="grid" x1="550" x2="928" y1="248.0" y2="248.0"/>
+<text x="542" y="252.0" font-size="11" class="t2" text-anchor="end">0.50</text>
+<line class="grid" x1="550" x2="928" y1="193.0" y2="193.0"/>
+<text x="542" y="197.0" font-size="11" class="t2" text-anchor="end">0.75</text>
+<line class="grid" x1="550" x2="928" y1="138.0" y2="138.0"/>
+<text x="542" y="142.0" font-size="11" class="t2" text-anchor="end">1.00</text>
+<path class="s1" d="M574.25,358 V216.79999999999998 Q574.25,212.79999999999998 578.25,212.79999999999998 H592.25 Q596.25,212.79999999999998 596.25,216.79999999999998 V358 Z"><title>Real project · BM25 · hit@5: 0.66</title></path>
+<path class="s2" d="M598.25,358 V214.6 Q598.25,210.6 602.25,210.6 H616.25 Q620.25,210.6 620.25,214.6 V358 Z"><title>Real project · BM25 · stale-truth: 0.67</title></path>
+<text x="597.25" y="378" font-size="12" text-anchor="middle" class="t2">BM25</text>
+<path class="s1" d="M668.75,358 V263.0 Q668.75,259.0 672.75,259.0 H686.75 Q690.75,259.0 690.75,263.0 V358 Z"><title>Real project · vector · hit@5: 0.45</title></path>
+<path class="s2" d="M692.75,358 V214.6 Q692.75,210.6 696.75,210.6 H710.75 Q714.75,210.6 714.75,214.6 V358 Z"><title>Real project · vector · stale-truth: 0.67</title></path>
+<text x="691.75" y="378" font-size="12" text-anchor="middle" class="t2">vector</text>
+<path class="s1" d="M763.25,358 V225.6 Q763.25,221.6 767.25,221.6 H781.25 Q785.25,221.6 785.25,225.6 V358 Z"><title>Real project · hybrid · hit@5: 0.62</title></path>
+<text x="774.25" y="215.6" font-size="11" text-anchor="middle">0.62</text>
+<path class="s2" d="M787.25,358 V190.4 Q787.25,186.4 791.25,186.4 H805.25 Q809.25,186.4 809.25,190.4 V358 Z"><title>Real project · hybrid · stale-truth: 0.78</title></path>
+<text x="798.25" y="180.4" font-size="11" text-anchor="middle">0.78</text>
+<text x="786.25" y="378" font-size="12" text-anchor="middle" class="t2">hybrid</text>
+<path class="s1" d="M857.75,358 V157.39999999999998 Q857.75,153.39999999999998 861.75,153.39999999999998 H875.75 Q879.75,153.39999999999998 879.75,157.39999999999998 V358 Z"><title>Real project · hybrid + truth · hit@5: 0.93</title></path>
+<text x="868.75" y="147.39999999999998" font-size="11" text-anchor="middle" font-weight="600">0.93</text>
+<path class="s2" d="M881.75,358 V166.2 Q881.75,162.2 885.75,162.2 H899.75 Q903.75,162.2 903.75,166.2 V358 Z"><title>Real project · hybrid + truth · stale-truth: 0.89</title></path>
+<text x="892.75" y="156.2" font-size="11" text-anchor="middle" font-weight="600">0.89</text>
+<text x="880.75" y="378" font-size="12" text-anchor="middle" font-weight="600">hybrid + truth</text>
+<text x="28" y="432" font-size="11" class="t2">Same 0–1 scale in both panels. Real-project numbers are aggregates; its corpus and questions are private.</text>
+</svg>

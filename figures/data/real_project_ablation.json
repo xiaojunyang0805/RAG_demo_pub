@@ -1,0 +1,11 @@
+{
+  "label": "Real project",
+  "subtitle": "121-document hardware project · 29 questions (9 stale) · 2026-10-26",
+  "note": "Aggregates only. Corpus and per-question results are private.",
+  "rows": [
+    {"mode": "BM25", "hit5": 0.66, "stale_ret": 0.67},
+    {"mode": "vector", "hit5": 0.45, "stale_ret": 0.67},
+    {"mode": "hybrid", "hit5": 0.62, "stale_ret": 0.78},
+    {"mode": "hybrid + truth", "hit5": 0.93, "stale_ret": 0.89}
+  ]
+}

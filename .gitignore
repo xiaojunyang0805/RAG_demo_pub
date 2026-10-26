@@ -1,0 +1,11 @@
+.truthrag/
+*.npz
+*.npy
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+build/
+dist/
+.env

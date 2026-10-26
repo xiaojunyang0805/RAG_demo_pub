@@ -1,0 +1,25 @@
+[project]
+name = "truthrag"
+version = "0.1.0"
+description = "Truth-aware RAG: retrieval that knows current facts from superseded ones."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+dependencies = ["pyyaml>=6", "numpy", "fastembed", "rank-bm25"]
+
+[project.optional-dependencies]
+llm = ["anthropic"]
+dev = ["pytest"]
+
+[project.scripts]
+truthrag = "truthrag.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
