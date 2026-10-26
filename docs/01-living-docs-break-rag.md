@@ -30,20 +30,22 @@ because the reader is assumed to know the context. A question phrased in natural
 document.
 
 On Halyard, plain hybrid retrieval (BM25 + vectors) puts a history chunk first for **38 %** of the questions, and
-for the question above its top three are all history, all saying 25 A — see the [README](../README.md) figure.
+for the question above its top three are all history, all saying 25 A — see the [README](../README.md) figure. On
+the real project it is **66 %** of the questions, and 70 % of everything in the top 5.
 
 ## How big the history is in a real project
 
-In the real project behind this repo — a 121-document hardware design corpus — **62 % of all chunks** came from
-archived documents, and logs added another 13 %. That is not neglect; it is a project that writes things down. The more
+In the real project behind this repo — a 121-document hardware design corpus — **61 % of all chunks** came from
+archived documents, and logs added another 15 %. That is not neglect; it is a project that writes things down. The more
 diligent the team, the more history the index holds.
 
 ## What does not fix it
 
 - **A bigger or newer embedding model.** It matches the history *better*, because the history is the better text
   match.
-- **A reranker.** A cross-encoder judges relevance, not currency. On the real project it added nothing to hit@5
-  and cost one stale-truth question (see page 09, coming).
+- **A reranker alone.** A cross-encoder judges relevance, not currency: an archived note that states the old value
+  in plain words is highly relevant. On top of truth weighting it helps a little (page 09, coming); instead of it,
+  it does not address the problem.
 - **Deleting the archive.** You lose the reasoning trail, and history keeps accruing in logs anyway.
 - **Asking the model to prefer recent sources.** It can only weigh what it is handed. If the top 8 chunks are history,
   the current value is not in the prompt.

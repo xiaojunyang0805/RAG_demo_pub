@@ -7,6 +7,7 @@ many chunks still exceed it.
 from __future__ import annotations
 
 import copy
+import dataclasses
 import json
 from collections import Counter
 from pathlib import Path
@@ -38,6 +39,24 @@ def embedder_tokenizer(cfg: dict):
     return counter, window
 
 
+def fit_window(chunks: list[Chunk], tokenizer, window: int, margin: int = 16, depth: int = 0) -> list[Chunk]:
+    """Re-split any chunk whose embedded text still exceeds the window. A corpus-average ratio cannot guarantee a
+    fit: code, part tables and ID lists tokenize far denser than prose."""
+    out: list[Chunk] = []
+    for c in chunks:
+        n = len(tokenizer.encode(c.embed_text()).ids)
+        if n <= window:
+            out.append(c)
+            continue
+        head = n - len(tokenizer.encode(c.text).ids)            # tokens spent on the path and heading trail
+        budget = int(len(c.text) * (window - head - margin) / max(1, n - head))
+        for i, t in enumerate(pack(c.text.splitlines(), max(200, budget)), 1):
+            out.append(dataclasses.replace(c, id=f"{c.id}.{i}", text=t, tokens=len(tokenizer.encode(t).ids)))
+    if depth < 4 and any(len(tokenizer.encode(c.embed_text()).ids) > window for c in out):
+        return fit_window(out, tokenizer, window, margin * 2, depth + 1)   # tighter budget each round
+    return out
+
+
 def ingest(cfg: dict) -> dict:
     root = resolve(cfg, cfg["corpus"]["root"])
     exclude = set(cfg["corpus"]["exclude_dirs"])
@@ -60,8 +79,9 @@ def ingest(cfg: dict) -> dict:
 
     tokenizer, window = embedder_tokenizer(cfg) if ch.get("chars_per_token") == "auto" else (None, None)
     if tokenizer:
-        sample = "\n".join(body for *_, body in docs)[:400_000]
-        cpt = len(sample) / max(1, len(tokenizer.encode(sample).ids))
+        # Measure the whole corpus, not a prefix: file order groups prose and dense tables, so a prefix is biased.
+        bodies = [body for *_, body in docs]
+        cpt = sum(map(len, bodies)) / max(1, sum(len(e.ids) for e in tokenizer.encode_batch(bodies)))
     else:
         cpt = float(ch["chars_per_token"]) if ch.get("chars_per_token") != "auto" else 2.5
     max_chars = int(ch["max_tokens"] * cpt)
@@ -76,6 +96,8 @@ def ingest(cfg: dict) -> dict:
                     id=f"{path}#{len(chunks)}", path=path, heading_path=heading_path, text=text, truth=truth,
                     retired_by=[] if is_terms_file else asserted_retired(text, terms, negation),
                     tokens=len(tokenizer.encode(text).ids) if tokenizer else int(len(text) / cpt)))
+    if tokenizer and window:
+        chunks = fit_window(chunks, tokenizer, window)
 
     out = index_dir(cfg)
     out.mkdir(parents=True, exist_ok=True)

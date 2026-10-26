@@ -16,8 +16,12 @@ whose answer changed, and a metric that asks which value ranked first.**
 | **Refusal** | 3 | 5 | "not in the corpus", no guessing |
 | **Redaction** | 2 | 3 | no confidential name appears |
 
-Categories turn a score into a diagnosis. On the real project every remaining retrieval miss was a stale-truth
-question — that told us where to work.
+Categories turn a score into a diagnosis. On the real project, two of the three remaining retrieval misses are
+stale-truth questions — that tells you where to work.
+
+Watch for a metric that stops discriminating. After the real project's chunking was fixed, no superseded value
+reached the top 5 in any mode, so stale-truth sat at 0.78 with or without truth weighting: its misses had become
+recall misses. *Top-1 is history* (0.66 → 0.00) kept showing the mechanism. Report both, and say which one moved.
 
 ## Mark relevance by text, not by file
 

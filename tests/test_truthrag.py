@@ -76,3 +76,23 @@ def test_redactor_and_guard():
     ans = check(Answer("q", "Brightwater uses 32 A [1][4].", citations=[1, 4], hits=[hit]), r)
     assert "citation [4] does not match a retrieved chunk" in ans.guard_issues
     assert "leak: [customer]" in ans.guard_issues and "Brightwater" not in ans.text
+
+
+class _FakeTokenizer:
+    """One token per 2 characters — enough to exercise the re-split logic without a model."""
+    class _Enc:
+        def __init__(self, n):
+            self.ids = list(range(n))
+
+    def encode(self, text):
+        return self._Enc(len(text) // 2)
+
+
+def test_fit_window_resplits_until_every_chunk_fits():
+    from truthrag.ingest import fit_window
+    rows = "\n".join(f"| row {i} | {'value ' * 12} |" for i in range(40))
+    big = Chunk("d.md#0", "d.md", ["Doc", "Table"], "| a | b |\n|---|---|\n" + rows, "current", [], 0)
+    out = fit_window([big], _FakeTokenizer(), window=200)
+    assert len(out) > 1
+    assert all(len(_FakeTokenizer().encode(c.embed_text()).ids) <= 200 for c in out)
+    assert all(c.text.startswith("| a | b |") for c in out)       # the real table header is repeated

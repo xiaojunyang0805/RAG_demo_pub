@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" width="960" height="400" role="img" aria-labelledby="title desc" class="root">
 <title id="title">The embedder reads 512 tokens and silently drops the rest</title>
-<desc id="desc">Real project, measured 2.66 characters per model token. A chunk sized as 800 tokens at a guessed 4 characters per token is 3,200 characters, about 1,200 model tokens: the embedder reads 512 and drops about 57 percent. A first fix at a guessed 3 characters per token still left 10.7 percent of chunks over the window. Sizing chunks with the embedder's own tokenizer leaves none over.</desc>
+<desc id="desc">Real project, measured 2.70 characters per model token. A chunk sized as 800 tokens at a guessed 4 characters per token is 3,200 characters, about 1,200 model tokens: the embedder reads 512 and drops about 57 percent. A first fix at a guessed 3 characters per token still left 10.7 percent of chunks over the window. Sizing chunks with the embedder's own tokenizer leaves none over.</desc>
 <style>
   .root { --surface:#fcfcfb; --t1:#0b0b0b; --t2:#52514e; --line:#b9b8b2; --read:#2a78d6; --lost:#e3e2de; --lostline:#b02a2a; --ok:#0a6b37; }
   @media (prefers-color-scheme: dark) {
@@ -17,7 +17,7 @@
 </defs>
 <rect width="960" height="400" rx="10" fill="var(--surface)"/>
 <text x="28" y="38" font-size="18" font-weight="600">An embedder reads its window and silently drops the rest</text>
-<text x="28" y="60" font-size="12" class="t2">Real project, measured with the embedder's own tokenizer: 2.66 characters per token, window 512 tokens. Scale: 1 px = 2 tokens.</text>
+<text x="28" y="60" font-size="12" class="t2">Real project, measured with the embedder's own tokenizer: 2.70 characters per token, window 512 tokens. Scale: 1 px = 2 tokens.</text>
 
 <!-- scale: x0 = 260, 0.5 px per token; window 512 -> x 516 -->
 <line class="win" x1="516" x2="516" y1="80" y2="330"/>

@@ -13,7 +13,7 @@ from pathlib import Path
 from xml.sax.saxutils import escape
 
 MODES = ["BM25", "vector", "hybrid", "hybrid + truth"]
-SERIES = [("hit5", "hit@5", "s1"), ("stale_ret", "stale-truth", "s2")]
+SERIES = [("hit5", "hit@5", "s1"), ("top1_current", "top-1 is current", "s2")]
 W, H = 960, 450
 PANEL_W, TOP, PLOT_H, LEFT = 430, 138, 220, 52
 BAR, GAP = 22, 2
@@ -39,7 +39,7 @@ def bar(x: float, y0: float, h: float, cls: str, tip: str) -> str:
 
 
 def panel(ox: float, data: dict) -> list[str]:
-    rows = {r["mode"]: r for r in data["rows"]}
+    rows = {r["mode"]: dict(r, top1_current=1 - r["top1_history"]) for r in data["rows"]}
     out = [f'<text x="{ox}" y="{TOP - 46}" font-size="15" font-weight="600">{escape(data["label"])}</text>',
            f'<text x="{ox}" y="{TOP - 28}" font-size="12" class="t2">{escape(data["subtitle"])}</text>']
     y0, plot_w = TOP + PLOT_H, PANEL_W - LEFT
@@ -69,7 +69,7 @@ def panel(ox: float, data: dict) -> list[str]:
 
 def main(halyard_json: str, real_json: str, out: str = "figures/ablation.svg") -> None:
     halyard = {"label": "Example corpus (Halyard)",
-               "subtitle": "20 documents · 21 questions (8 stale) · synthetic, built to show the effect",
+               "subtitle": "20 documents · 21 questions · synthetic, built to show the effect",
                "rows": json.loads(Path(halyard_json).read_text(encoding="utf-8"))}
     real = json.loads(Path(real_json).read_text(encoding="utf-8"))
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}" role="img" '
@@ -79,13 +79,13 @@ def main(halyard_json: str, real_json: str, out: str = "figures/ablation.svg") -
              'weighting, on the example corpus and on a real project. Values are listed in the README table.</desc>',
              f"<style>{STYLE}</style>",
              f'<rect width="{W}" height="{H}" rx="10" fill="var(--surface)"/>',
-             '<text x="28" y="36" font-size="18" font-weight="600">Truth weighting puts the current value first'
+             '<text x="28" y="36" font-size="18" font-weight="600">Truth weighting puts current sources first'
              '</text>',
              # legend
              '<rect x="28" y="52" width="12" height="12" rx="2" class="s1"/>'
              '<text x="46" y="62" font-size="12">hit@5 — a relevant chunk in the top 5</text>',
              '<rect x="300" y="52" width="12" height="12" rx="2" class="s2"/>'
-             '<text x="318" y="62" font-size="12">stale-truth — the current value outranks the superseded one</text>']
+             '<text x="318" y="62" font-size="12">top-1 is current — the best-ranked chunk is not history</text>']
     parts += panel(28, halyard) + panel(28 + PANEL_W + 40, real)
     parts.append(f'<text x="28" y="{H - 18}" font-size="11" class="t2">Same 0–1 scale in both panels. Real-project '
                  f'numbers are aggregates; its corpus and questions are private.</text>')

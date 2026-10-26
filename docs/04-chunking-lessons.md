@@ -14,16 +14,25 @@ backticks break into many tokens. Measured with the embedder's own tokenizer:
 
 | Corpus | Characters per token |
 |---|---|
-| Real hardware project | 2.66 |
-| Halyard example | 2.98 |
+| Real hardware project | 2.70 |
+| Halyard example | 2.96 |
 | Typical English prose (rule of thumb) | ≈ 4 |
 
 How it showed up: a question about a voltage that ten chunks state missed the top 5 entirely. The value
 sat in the second half of long sections. After re-chunking, the same question found it at ranks 1 and 2.
 
 **What `truthrag` does:** with `chars_per_token: auto` (the default) it measures this ratio on your corpus with the
-embedder's tokenizer, sizes chunks to fit, and reports `chunks_over_window` after every ingest. On Halyard: 2.98
+embedder's tokenizer, sizes chunks to fit, and reports `chunks_over_window` after every ingest. On Halyard: 2.96
 characters per token, 0 chunks over.
+
+Two details that mattered, both learned the hard way on the real project:
+
+- **Measure the whole corpus, not a prefix.** A first version measured the first 400,000 characters. Files are read
+  in path order, so that prefix was mostly business prose: it measured 3.13 instead of 2.70, and **1,424 chunks
+  (20 %) ended up over the window** — worse than the guess it replaced.
+- **An average cannot guarantee a fit.** Part tables, ID lists and code tokenize far denser than the corpus average.
+  After chunking, `truthrag` re-splits any chunk that still exceeds the window, tightening until none do. On the
+  real project: 8,582 chunks, 0 over.
 
 ## 2. Tokenizers that keep IDs whole can break ordinary words
 
